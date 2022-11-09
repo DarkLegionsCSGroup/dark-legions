@@ -3,16 +3,13 @@ A card game
 
 
 # Resources
- - [NOTION](https://www.notion.so/thegoldencut/Dark-Legions-Documentation-8b38b72b3937419fb27c1b2ef97ea62b)
- - [LibGDX Wiki](https://libgdx.com/wiki/)
- - [LibGDX API](https://libgdx.badlogicgames.com/ci/nightlies/docs/api/)
+ - [NOTION](https://www.notion.so/thegoldencut/Dark-Legions-Documentation-8b38b72b3937419fb27c1b2ef97ea62b) - Project Documentation
+ - [LibGDX Wiki](https://libgdx.com/wiki/) - LibGDX Wiki
+ - [LibGDX Javadoc](https://javadoc.io/doc/com.badlogicgames.gdx) - Javadoc for LibGDX and its dependencies
+ - [JavaDoc Usage](https://codingcompiler.com/documenting-java-code/) - How to use JavaDoc in CodingCompiler
 
 # IDE SETUP
-#### Eclipse IDEA
-- [Eclipse Setup](https://libgdx.badlogicgames.com/documentation/gettingstarted/IDE%20Setup.html)
-
-#### IntelliJ IDEA
- - [LibGDX Setup](https://libgdx.com/dev/setup/)
-
-#### Android Studio Setup
- - [Android Studio Setup](https://libgdx.com/dev/setup/android-studio/)
+The links below are for setting up the IDE of your choice.
+(Some issues with Android Studio due to Gradle build not generating tasks?)
+ - [LibGDX Import](https://libgdx.com/wiki/start/import-and-running) - Import and Running 
+ - [LibGDX Setup](https://libgdx.com/wiki/start) - LibGDX Setup (from scratch)
