@@ -52,7 +52,7 @@ public class DarkLegions extends Game {
 
 	@Override
 	public void create () {
-		loadingScreen = new LoadingScreen(this);
+		LoadingScreen loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
 	}
 /*
