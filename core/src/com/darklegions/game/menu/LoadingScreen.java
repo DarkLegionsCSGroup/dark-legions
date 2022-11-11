@@ -4,7 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.darklegions.game.DarkLegions;
 
 public class LoadingScreen implements Screen {
-    private DarkLegions parent;
+    final DarkLegions parent;
 
     public LoadingScreen(DarkLegions darkLegions) {
         parent = darkLegions;
