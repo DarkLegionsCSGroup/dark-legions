@@ -1,6 +1,6 @@
 {
     "branches": "main",
-    "repositoryUrl": "https://github.com/DarkLegionsCSGroup/dark-legions.git",
+    "repositoryUrl": "https://github.com/johnclark96/dark-legions.git",
     "debug": "false",
     "plugins": [
         "@semantic-release/commit-analyzer",
