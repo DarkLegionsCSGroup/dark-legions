@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.darklegions.game.gameobjects.Cards;
+import com.darklegions.game.gameobjects.Creature;
 import com.darklegions.game.menu.EndScreen;
 import com.darklegions.game.menu.LoadingScreen;
 import com.darklegions.game.menu.MainScreen;
