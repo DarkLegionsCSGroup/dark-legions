@@ -24,24 +24,3 @@
 * **mainscreen:** Start of working on the game/field ([5e9221d](https://github.com/johnclark96/dark-legions/commit/5e9221d62e997ba1cb1aad4c0a0bf1f242b8cdd1))
 * **menu:** added gameTitle text to the table ([9cdf139](https://github.com/johnclark96/dark-legions/commit/9cdf139e642dc21de285845d3cfcf187f38efe11))
 * **node:** created node for semantic-release ([5b8cd6f](https://github.com/johnclark96/dark-legions/commit/5b8cd6ff0c26c093b64e7970ba4518ac812c91d8))
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-
-### Added
-- Added this changelog file to track changes to the project.
-
-### Fixed
-- Fixed the README.md file to include documentation.
-
-
-
-## [1.0.0] - 9/22/2022
-### Added
-- Initial project setup
