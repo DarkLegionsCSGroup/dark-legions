@@ -2,8 +2,11 @@ package com.darklegions.game.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,11 +23,17 @@ import com.darklegions.game.gameobjects.Creature;
 
 import javax.swing.event.ChangeEvent;
 
-public class MenuScreen implements Screen {
+public class MenuScreen extends ScreenAdapter {
     private final Stage stage;
     private final DarkLegions parent;
     public SpriteBatch batch = new SpriteBatch();
     public ShapeRenderer shapeRenderer = new ShapeRenderer();
+    //public static Sprite backgroundSprite;
+    Texture background = new Texture(Gdx.files.internal("concept.png"));
+    Sprite backgroundSprite = new Sprite(background);
+
+
+
 
     public MenuScreen(DarkLegions darkLegions) {
         parent = darkLegions;
@@ -33,13 +42,14 @@ public class MenuScreen implements Screen {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
-
     @Override
     public void show() {
         Table table = new Table();
         table.setFillParent(true);
         table.setDebug(true);
+
         stage.addActor(table);
+
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
@@ -69,7 +79,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log("MenuScreen", "New Game Button Clicked");
-                //parent.changeScreen(DarkLegions.APPLICATION);
+                parent.changeScreen(DarkLegions.APPLICATION);
             }
         });
 
@@ -77,7 +87,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log("MenuScreen", "Options Button Clicked");
-                //parent.changeScreen(DarkLegions.OPTIONS);
+                parent.changeScreen(DarkLegions.OPTIONS);
             }
         });
 
@@ -99,6 +109,9 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.getBatch().begin();
+        stage.getBatch().draw(backgroundSprite, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        stage.getBatch().end();
         stage.draw();
         //testCard.drawCard(batch, shapeRenderer);
         //shapeRenderer.end();
