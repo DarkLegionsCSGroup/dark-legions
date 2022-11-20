@@ -2,6 +2,7 @@ package com.darklegions.game.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +21,7 @@ import com.darklegions.game.gameobjects.Creature;
 
 import javax.swing.event.ChangeEvent;
 
-public class MenuScreen implements Screen {
+public class MenuScreen extends ScreenAdapter {
     private final Stage stage;
     private final DarkLegions parent;
     public SpriteBatch batch = new SpriteBatch();

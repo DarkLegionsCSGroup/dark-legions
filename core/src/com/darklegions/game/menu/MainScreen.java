@@ -1,16 +1,9 @@
 package com.darklegions.game.menu;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.ScreenAdapter;
 import com.darklegions.game.DarkLegions;
 
-public class MainScreen implements Screen {
+public class MainScreen extends ScreenAdapter {
     private DarkLegions parent;
 
     public MainScreen(DarkLegions darkLegions) {

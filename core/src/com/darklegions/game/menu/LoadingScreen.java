@@ -1,9 +1,10 @@
 package com.darklegions.game.menu;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.darklegions.game.DarkLegions;
 
-public class LoadingScreen implements Screen {
+public class LoadingScreen extends ScreenAdapter {
     final DarkLegions parent;
 
     public LoadingScreen(DarkLegions darkLegions) {
