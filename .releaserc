@@ -1,0 +1,33 @@
+{
+    "branches": "main",
+    "repositoryUrl": "https://github.com/johnclark96/dark-legions.git",
+    "debug": "false",
+    "plugins": [
+        "semantic-release/commit-analyzer",
+        "semantic-release/release-notes-generator",
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "CHANGELOG.md",
+                "changelogTitle": "# semantic Versioning Changelog"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": ["CHANGELOG.md"]
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+                "assets": [
+                    {
+                        "path": "release/**",
+                        "label": "Changelog"
+                    }
+                ]
+            }
+        ]
+    ]
+}
