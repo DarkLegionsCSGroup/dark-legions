@@ -1,5 +1,12 @@
 # semantic Versioning Changelog
 
+## [1.0.1](https://github.com/johnclark96/dark-legions/compare/v1.0.0...v1.0.1) (2022-11-20)
+
+
+### Bug Fixes
+
+* **repo:** added .releaserc ([c97cc8d](https://github.com/johnclark96/dark-legions/commit/c97cc8d83926448b7f688c00d8bda61d152be723))
+
 # 1.0.0 (2022-11-20)
 
 
