@@ -3,8 +3,8 @@
     "repositoryUrl": "https://github.com/johnclark96/dark-legions.git",
     "debug": "false",
     "plugins": [
-        "semantic-release/commit-analyzer",
-        "semantic-release/release-notes-generator",
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
         [
             "@semantic-release/changelog",
             {
