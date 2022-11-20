@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,12 +15,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.darklegions.game.DarkLegions;
+import com.darklegions.game.gameobjects.Cards;
+import com.darklegions.game.gameobjects.Creature;
 
 import javax.swing.event.ChangeEvent;
 
 public class MenuScreen implements Screen {
     private final Stage stage;
     private final DarkLegions parent;
+    public SpriteBatch batch = new SpriteBatch();
+    public ShapeRenderer shapeRenderer = new ShapeRenderer();
 
     public MenuScreen(DarkLegions darkLegions) {
         parent = darkLegions;
@@ -49,6 +55,7 @@ public class MenuScreen implements Screen {
         Gdx.app.log("MenuScreen", "options: " + options.getText());
         TextButton exit = new TextButton("Exit", skin);
         Gdx.app.log("MenuScreen", "exit: " + exit.getText());
+
 
         table.add(gameTitle).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
@@ -81,6 +88,9 @@ public class MenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
+
+        stage.draw();
+
     }
 
     @Override
@@ -90,6 +100,8 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
+        //testCard.drawCard(batch, shapeRenderer);
+        //shapeRenderer.end();
     }
 
     @Override
