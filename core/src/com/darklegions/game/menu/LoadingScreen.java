@@ -1,5 +1,6 @@
 package com.darklegions.game.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.darklegions.game.DarkLegions;
 
@@ -14,11 +15,13 @@ public class LoadingScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        Gdx.app.log("LoadingScreen", "render");
         parent.changeScreen(DarkLegions.MENU);
     }
 
     @Override
     public void dispose() {
+        parent.dispose();
 
     }
 }

@@ -25,7 +25,7 @@ import javax.swing.event.ChangeEvent;
 
 public class MenuScreen extends ScreenAdapter {
     private final Stage stage;
-    private final DarkLegions parent;
+    final DarkLegions parent;
     public SpriteBatch batch = new SpriteBatch();
     public ShapeRenderer shapeRenderer = new ShapeRenderer();
     //public static Sprite backgroundSprite;
@@ -36,24 +36,19 @@ public class MenuScreen extends ScreenAdapter {
 
 
 
-    public MenuScreen(DarkLegions darkLegions) {
-        parent = darkLegions;
+    public MenuScreen(final DarkLegions parent) {
+        this.parent = parent;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-    }
-    @Override
-    public void show() {
+
         Table table = new Table();
         table.setFillParent(true); //table is set to fill the stage
         table.setDebug(true); // This is optional, but enables debug lines for tables.
         stage.addActor(table); //Creates the table to be added to the stage
 
-
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
-
-
 
         /* BUTTONS FOR THE MAIN MENU */
 
@@ -61,13 +56,9 @@ public class MenuScreen extends ScreenAdapter {
         //TextField gameTitleNew = new TextField("Dark Legions", skin); //Was testing TextField instead of TextButton
         TextButton gameTitle = new TextButton("Dark Legions", skin);
         gameTitle.setDisabled(true);
-        Gdx.app.log("MenuScreen", "gameTitle: " + gameTitle.getText());
         TextButton newGame = new TextButton("New Game", skin);
-        Gdx.app.log("MenuScreen", "newGame: " + newGame.getText());
         TextButton options = new TextButton("Options", skin);
-        Gdx.app.log("MenuScreen", "options: " + options.getText());
         TextButton exit = new TextButton("Exit", skin);
-        Gdx.app.log("MenuScreen", "exit: " + exit.getText());
 
         /* FORMATTING BUTTONS INTO A TABLE */
         //TODO: Maybe shift the buttons over to the left side of the screen?
@@ -133,6 +124,7 @@ public class MenuScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        Gdx.app.debug("MenuScreen", "Disposing MenuScreen");
         stage.dispose();
     }
 }
