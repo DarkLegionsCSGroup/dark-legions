@@ -1,5 +1,21 @@
 # semantic Versioning Changelog
 
+# [1.1.0](https://github.com/johnclark96/dark-legions/compare/v1.0.1...v1.1.0) (2022-11-21)
+
+
+### Bug Fixes
+
+* **field:** attempt at creating a playing field ([6ae5fd8](https://github.com/johnclark96/dark-legions/commit/6ae5fd83b83d2bc2f7a4c96860dd2ed933ce3730))
+* **game:** LOTS OF CHANGES HERE ([3f62cbf](https://github.com/johnclark96/dark-legions/commit/3f62cbfaf91cf09fa3bd4e55d69572b982ffe096))
+* **gradle:** updated from 7.0.4 gradle to 7.2.0 ([d7ee5e5](https://github.com/johnclark96/dark-legions/commit/d7ee5e5085efe1255449dbd00c5cc8a739fd1246))
+* **main:** fixed changedScreen to setScreen ([640e2a9](https://github.com/johnclark96/dark-legions/commit/640e2a9b3929cd76b532065bdb492bdca517e4cf))
+* **menu:** minor code cleanup ([57c94be](https://github.com/johnclark96/dark-legions/commit/57c94be1844ccc1d4f7426250e9a8243625073da))
+
+
+### Features
+
+* **game:** change window size ([714c733](https://github.com/johnclark96/dark-legions/commit/714c733d175032cde4ae497190493d118cf8abe1))
+
 ## [1.0.1](https://github.com/johnclark96/dark-legions/compare/v1.0.0...v1.0.1) (2022-11-20)
 
 
