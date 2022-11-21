@@ -3,6 +3,7 @@ package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -12,8 +13,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.darklegions.game.DarkLegions;
 
 public class MainScreen extends ScreenAdapter {
-    final DarkLegions parent;
-    private Stage stage;
+    DarkLegions parent;
+    Stage stage;
+    OrthographicCamera camera;
 
     public MainScreen(final DarkLegions parent) {
         this.parent = parent;
@@ -21,26 +23,9 @@ public class MainScreen extends ScreenAdapter {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.setFillParent(true);
-        table.setDebug(true);
-        stage.addActor(table);
-
-        Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
-
-        TextButton deckZone = new TextButton("Deck Zone", skin);
-        TextButton fieldZone = new TextButton("Field Zone", skin);
-        TextButton graveyardZone = new TextButton("Graveyard Zone", skin);
-        TextButton handZone = new TextButton("Hand Zone", skin);
-        TextButton creatureZone = new TextButton("Creature Zone", skin);
-        TextButton spellZone = new TextButton("Spell Zone", skin);
-        TextButton exitButton = new TextButton("Exit", skin);
-
-        table.add(deckZone).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(fieldZone).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(graveyardZone).fillX().uniformX();
+        DrawField drawField = new DrawField(parent);
+        drawField.createField();
+        stage.addActor(drawField.createField());
     }
 
     @Override
@@ -49,6 +34,8 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false,800,400);
         stage.draw();
         /* ESC Key Takes you back to Menu */
         //TODO: Changing Screens doesn't allow you to interact with the Menu Screen
@@ -61,19 +48,12 @@ public class MainScreen extends ScreenAdapter {
     }
     @Override
     public void resize(int width, int height) {
-//        stage = new Stage(new StretchViewport(1920, 1080));
-//        Gdx.input.setInputProcessor(stage);
-        Gdx.graphics.setWindowedMode(1920, 1080);
+        //stage = new Stage(new StretchViewport(width, height));
+        Gdx.input.setInputProcessor(stage);
+        Gdx.graphics.setWindowedMode(1600  , 1000);
 //        //TODO: Resize viewport to fit screen
-        stage.getViewport().update(width, height, true);
-
-
+        //stage.getViewport().update(width, height, true);
     }
-
-//    @Override
-//    public void hide() {
-//        //Gdx.input.setInputProcessor(null);
-//    }
 
     @Override
     public void dispose() {
