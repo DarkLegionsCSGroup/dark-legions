@@ -37,7 +37,7 @@ public class MainScreen extends ScreenAdapter {
     public void resize(int width, int height) {
         stage = new Stage(new StretchViewport(800, 480));
         Gdx.input.setInputProcessor(stage);
-
+        Gdx.graphics.setWindowedMode(1920, 1080);
         //TODO: Resize viewport to fit screen
         stage.getViewport().update(width, height, true);
 
