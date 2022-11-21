@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.darklegions.game.menu.EndScreen;
 import com.darklegions.game.menu.LoadingScreen;
 import com.darklegions.game.menu.MainScreen;
@@ -43,6 +42,7 @@ public class DarkLegions extends Game {
 			case APPLICATION:
 				if(mainScreen == null) mainScreen = new MainScreen(this);
 				this.setScreen(mainScreen);
+				//
 				break;
 			case ENDGAME:
 				if(endScreen == null) endScreen = new EndScreen(this);
@@ -58,14 +58,17 @@ public class DarkLegions extends Game {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
+	}
 
-
+	@Override
+	public void render() {
+		super.render();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		shapeRenderer.dispose();
 		font.dispose();
+		shapeRenderer.dispose();
 	}
 }
