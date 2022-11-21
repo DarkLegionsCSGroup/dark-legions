@@ -18,11 +18,9 @@ public class MainScreen extends ScreenAdapter {
     public MainScreen(final DarkLegions parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
-
         Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
         table.setFillParent(true);
         table.setDebug(true);
@@ -43,7 +41,6 @@ public class MainScreen extends ScreenAdapter {
         table.add(fieldZone).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(graveyardZone).fillX().uniformX();
-        stage.draw();
     }
 
     @Override
@@ -53,22 +50,21 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
         /* ESC Key Takes you back to Menu */
         //TODO: Changing Screens doesn't allow you to interact with the Menu Screen
         if(Gdx.input.isKeyJustPressed(111)) {
             Gdx.app.log("MainScreen", "Pressed");
-            parent.changeScreen(DarkLegions.MENU);
+            parent.setScreen(new MenuScreen(parent));
         }
         //TODO: Draw empty playing field
 
     }
     @Override
     public void resize(int width, int height) {
-        stage = new Stage(new StretchViewport(1920, 1080));
-        Gdx.input.setInputProcessor(stage);
+//        stage = new Stage(new StretchViewport(1920, 1080));
+//        Gdx.input.setInputProcessor(stage);
         Gdx.graphics.setWindowedMode(1920, 1080);
-        //TODO: Resize viewport to fit screen
+//        //TODO: Resize viewport to fit screen
         stage.getViewport().update(width, height, true);
 
 
