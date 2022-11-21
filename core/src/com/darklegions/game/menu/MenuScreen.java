@@ -29,6 +29,7 @@ public class MenuScreen extends ScreenAdapter {
     public SpriteBatch batch = new SpriteBatch();
     public ShapeRenderer shapeRenderer = new ShapeRenderer();
     //public static Sprite backgroundSprite;
+    //TODO: GET A NEW BACKGROUND IMAGE TO FIT AND SCALE PROPERLY
     Texture background = new Texture(Gdx.files.internal("concept.png"));
     Sprite backgroundSprite = new Sprite(background);
 
@@ -45,17 +46,19 @@ public class MenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         Table table = new Table();
-        table.setFillParent(true);
-        table.setDebug(true);
-
-        stage.addActor(table);
+        table.setFillParent(true); //table is set to fill the stage
+        table.setDebug(true); // This is optional, but enables debug lines for tables.
+        stage.addActor(table); //Creates the table to be added to the stage
 
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
+
+
+        /* BUTTONS FOR THE MAIN MENU */
+
         //TODO: Disable the gameTitle button or change it to text
-        //TODO: Change gameTitle to be TextFields instead of TextButtons
-        //TextField gameTitleNew = new TextField("Dark Legions", skin);
+        //TextField gameTitleNew = new TextField("Dark Legions", skin); //Was testing TextField instead of TextButton
         TextButton gameTitle = new TextButton("Dark Legions", skin);
         gameTitle.setDisabled(true);
         Gdx.app.log("MenuScreen", "gameTitle: " + gameTitle.getText());
@@ -66,7 +69,8 @@ public class MenuScreen extends ScreenAdapter {
         TextButton exit = new TextButton("Exit", skin);
         Gdx.app.log("MenuScreen", "exit: " + exit.getText());
 
-
+        /* FORMATTING BUTTONS INTO A TABLE */
+        //TODO: Maybe shift the buttons over to the left side of the screen?
         table.add(gameTitle).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(newGame).fillX().uniformX();
@@ -75,6 +79,7 @@ public class MenuScreen extends ScreenAdapter {
         table.row();
         table.add(exit).fillX().uniformX();
 
+        /* BUTTON LISTENERS START */
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -99,6 +104,7 @@ public class MenuScreen extends ScreenAdapter {
             }
         });
 
+        /* BUTTON LISTENERS END */
         stage.draw();
 
     }
@@ -109,8 +115,11 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        //Draws the background image to the screen
         stage.getBatch().begin();
+        //TODO: FIX THE BACKGROUND IMAGE TO FIT THE SCREEN SIZE AND NOT BE STRETCHED
         stage.getBatch().draw(backgroundSprite, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //backgroundSprite.draw(stage.getBatch()); //Draws the background image to screen
         stage.getBatch().end();
         stage.draw();
         //testCard.drawCard(batch, shapeRenderer);
@@ -120,21 +129,6 @@ public class MenuScreen extends ScreenAdapter {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override
