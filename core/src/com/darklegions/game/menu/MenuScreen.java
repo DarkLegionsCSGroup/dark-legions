@@ -57,18 +57,24 @@ public class MenuScreen extends ScreenAdapter {
         TextButton gameTitle = new TextButton("Dark Legions", skin);
         gameTitle.setDisabled(true);
         TextButton newGame = new TextButton("New Game", skin);
+        TextButton gallery = new TextButton("Gallery", skin);
         TextButton options = new TextButton("Options", skin);
         TextButton exit = new TextButton("Exit", skin);
 
         /* FORMATTING BUTTONS INTO A TABLE */
         //TODO: Maybe shift the buttons over to the left side of the screen?
+        table.left();
+        table.padLeft(20);
         table.add(gameTitle).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(newGame).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
+        table.add(gallery).fillX().uniformX();
+        table.row().pad(10, 0, 10, 0);
         table.add(options).fillX().uniformX();
-        table.row();
+        table.row().pad(10, 0, 10, 0);
         table.add(exit).fillX().uniformX();
+
 
         /* BUTTON LISTENERS START */
         newGame.addListener(new ChangeListener() {
