@@ -5,8 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Spell implements Cards {
+    private String cardName;
     private UniqueEffect effectCard;
     public Sprite cardArt;
+
+    public Spell(String name) {
+        this.cardName = name;
+    }
 
     @Override
     public Sprite getSpriteCardBack() {
