@@ -16,7 +16,7 @@ public class Creature extends Actor implements Cards {
     public final static float HEIGHT = 200;
     public final static float WIDTH = 100;
 
-    String cardName;
+    private String cardName;
     private int power;
     private int defend;
     private UniqueEffect effectCard;
