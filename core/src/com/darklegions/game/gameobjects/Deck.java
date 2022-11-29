@@ -15,7 +15,9 @@ public class Deck {
     If we were to shuffle a deck of different objects, we would need an identifier to know which object is which eg Planet card is of "planet" type(string)
     The other idea is that we have multiple lists that only contain certain objects then shuffle and add n amount of those specific card types then shuffle the deck at the end.
      */
-
+    private static final int MAX_STRUCTURE = 10;
+    private static final int MAX_CREATURE = 20;
+    private static final int MAX_SPELL = 10;
     private ArrayList<Cards> deck;
     private Creature[] creaturePool = new Creature[]{
             new Creature("Captain Bogart"),
@@ -60,20 +62,17 @@ public class Deck {
     //Each deck should contain 10 structures, 10 spells, 20 creatures?
     public Deck() {
         this.deck = new ArrayList<>();
-        int structureLimit = 10;
-        int spellLimit = 10;
-        int creatureLimit = 20;
-        for(int i = 0; i < creatureLimit; i++) {
-            shuffleArray(creaturePool);
-            deck.add(creaturePool[0]);
+        shuffleArray(creaturePool);
+        shuffleArray(spellPool);
+        shuffleArray(structurePool);
+        for(int i = 0; i < MAX_CREATURE; i++) {
+            deck.add(creaturePool[i]);
         }
-        for(int i = 0; i < spellLimit; i++) {
-            shuffleArray(spellPool);
-            deck.add(spellPool[0]);
+        for(int i = 0; i < MAX_SPELL; i++) {
+            deck.add(spellPool[i]);
         }
-        for(int i = 0; i < structureLimit; i++) {
-            shuffleArray(structurePool);
-            deck.add(structurePool[0]);
+        for(int i = 0; i < MAX_STRUCTURE; i++) {
+            deck.add(structurePool[i]);
         }
 
     }

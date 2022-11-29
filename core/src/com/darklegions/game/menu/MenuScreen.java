@@ -24,8 +24,8 @@ import com.darklegions.game.gameobjects.Creature;
 import javax.swing.event.ChangeEvent;
 
 public class MenuScreen extends ScreenAdapter {
-    private final Stage stage;
-    final DarkLegions parent;
+    private Stage stage;
+    private DarkLegions parent;
     public SpriteBatch batch = new SpriteBatch();
     public ShapeRenderer shapeRenderer = new ShapeRenderer();
     //public static Sprite backgroundSprite;
@@ -39,7 +39,6 @@ public class MenuScreen extends ScreenAdapter {
     public MenuScreen(final DarkLegions parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
 
@@ -74,6 +73,7 @@ public class MenuScreen extends ScreenAdapter {
         table.add(options).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(exit).fillX().uniformX();
+        table.setDebug(true);
 
 
         /* BUTTON LISTENERS START */
@@ -111,13 +111,14 @@ public class MenuScreen extends ScreenAdapter {
         // Clear the screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        //stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         //Draws the background image to the screen
         stage.getBatch().begin();
         //TODO: FIX THE BACKGROUND IMAGE TO FIT THE SCREEN SIZE AND NOT BE STRETCHED
         stage.getBatch().draw(backgroundSprite, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //backgroundSprite.draw(stage.getBatch()); //Draws the background image to screen
         stage.getBatch().end();
+        Gdx.input.setInputProcessor(stage);
         stage.draw();
         //testCard.drawCard(batch, shapeRenderer);
         //shapeRenderer.end();
