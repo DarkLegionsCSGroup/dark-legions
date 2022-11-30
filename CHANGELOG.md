@@ -1,5 +1,18 @@
 # semantic Versioning Changelog
 
+# [1.2.0](https://github.com/johnclark96/dark-legions/compare/v1.1.0...v1.2.0) (2022-11-30)
+
+
+### Bug Fixes
+
+* changes to get new AbstractGameScreen class setup ([02ba505](https://github.com/johnclark96/dark-legions/commit/02ba505b743efa700d77a687079193990e84ac57))
+* **core:** getting options to work ([e5f99ad](https://github.com/johnclark96/dark-legions/commit/e5f99ad36dfec0d75731e768a80c55fd4ffdc635))
+
+
+### Features
+
+* added 2 utilities classes ([b8b400c](https://github.com/johnclark96/dark-legions/commit/b8b400c161e384f59c0d262049c6db177d9ab6aa))
+
 # [1.1.0](https://github.com/johnclark96/dark-legions/compare/v1.0.1...v1.1.0) (2022-11-21)
 
 
