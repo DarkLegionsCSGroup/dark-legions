@@ -23,7 +23,6 @@ public class MainScreen extends ScreenAdapter {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 
         DrawField drawField = new DrawField(parent);
-        drawField.createField();
         stage.addActor(drawField.createField());
     }
 
@@ -33,7 +32,7 @@ public class MainScreen extends ScreenAdapter {
         super.render(delta);
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.act();
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800,400);
         stage.draw();
@@ -57,7 +56,7 @@ public class MainScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        Gdx.app.debug("MainScreen", "disposed");
+       // Gdx.app.debug("MainScreen", "disposed");
         stage.dispose();
         parent.dispose();
     }
