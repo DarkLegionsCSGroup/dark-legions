@@ -21,6 +21,8 @@ public class Options {
     public float soundVolume;
     public float musicVolume;
     public boolean showFpsCounter;
+    public boolean isFullScreen;
+
 
     private final Preferences prefs;
 
@@ -34,6 +36,7 @@ public class Options {
         soundVolume = MathUtils.clamp(prefs.getFloat("soundVolume", 0.5f), 0.0f, 1.0f);
         musicVolume = MathUtils.clamp(prefs.getFloat("musicVolume", 0.5f), 0.0f, 1.0f);
         showFpsCounter = prefs.getBoolean("showFpsCounter", false);
+        isFullScreen = prefs.getBoolean("isFullScreen", false);
     }
 
     public void save() {
@@ -42,6 +45,7 @@ public class Options {
         prefs.putFloat("soundVolume", soundVolume);
         prefs.putFloat("musicVolume", musicVolume);
         prefs.putBoolean("showFpsCounter", showFpsCounter);
+        prefs.putBoolean("isFullScreen", isFullScreen);
         prefs.flush();
     }
 
