@@ -1,14 +1,17 @@
 package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.darklegions.game.DarkLegions;
 import org.w3c.dom.Text;
 
 public class DrawField {
-    DarkLegions parent;
+    public DarkLegions parent;
 
     public DrawField(DarkLegions parent) {
         this.parent = parent;
@@ -16,36 +19,69 @@ public class DrawField {
     }
     public Actor createField() {
         Gdx.app.log("Create", "drawField");
+
+        /*
+                Table Creation
+         */
         Table gameField = new Table();
+        gameField.defaults().pad(10);
+        gameField.left().top();
         gameField.setFillParent(true);
         gameField.setDebug(true);
 
-        //gameField.add(drawPlayer2()).top();
-        //gameField.row().pad(0, 0, 10f, 0);
-        gameField.add(drawPlayer1()).bottom().maxWidth(1000f);
+        /*
+                Button Properties
+         */
+        Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;
+        float buttonHeight = buttonWidth * 1.3f;
+        TextButton playerOne = new TextButton("Player 1", skin);
+        TextButton playerTwo = new TextButton("Player 2", skin);
+        TextButton handCardOne =  new TextButton("card", skin);
+        TextButton handCardTwo = new TextButton("card", skin);
+        TextButton handCardThree = new TextButton("card", skin);
+        TextButton handCardFour = new TextButton("card", skin);
+        TextButton handCardFive = new TextButton("card", skin);
+        TextButton deckZone = new TextButton("Deck Zone", skin);
+        TextButton creatureZone = new TextButton("Card", skin);
+
+        handCardOne.setWidth(5);
+        handCardTwo.setWidth(5);
+        handCardThree.setWidth(5);
+        handCardFour.setWidth(5);
+        handCardFive.setWidth(5);
+
+        gameField.add(playerOne);
+        gameField.add(handCardOne).width(buttonWidth).expandX();
+        gameField.add(handCardTwo).width(buttonWidth).expandX();
+        gameField.add(handCardThree).width(buttonWidth).expandX();
+        gameField.add(handCardFour).width(buttonWidth).expandX();
+        gameField.add(handCardFive).width(buttonWidth).expandX();
+
+        gameField.row();
+        gameField.add(deckZone);
+        gameField.add(creatureZone).width(buttonWidth).padLeft(400);
+
+        //drawPlayer1(playerOneTable);
+        //drawPlayer2(playerTwoTable);
+
+
+       // gameField.add(headerLabel).colspan(2).fillX();
 
         return gameField;
 
     }
 
-    private Table drawPlayer1() {
+    private Table drawPlayer1(Table playerOneTable) {
         Gdx.app.log("DrawField", "drawPlayer1");
 
-        Table playerOneTable = new Table();
-        //playerOneTable.setFillParent(true);
         playerOneTable.setDebug(true);
-        playerOneTable.setWidth(1000f);
-        playerOneTable.setHeight(400f);
-        playerOneTable.align(1);
-        playerOneTable.padTop(100);
-
-        Table centerField = new Table();
-        centerField.setDebug(true);
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
         TextButton playerOne = new TextButton("Player 1", skin);
-        TextButton deckZone = new TextButton("Deck Zone", skin);
+
+
         TextButton fieldZone = new TextButton("Field Zone", skin);
         TextButton graveyardZone = new TextButton("Graveyard Zone", skin);
         TextButton handZone = new TextButton("Hand Zone", skin);
@@ -53,32 +89,17 @@ public class DrawField {
         TextButton spellZone = new TextButton("Spell Zone", skin);
         TextButton lifeZone = new TextButton("Life", skin);
 
-        playerOneTable.add(playerOne).bottom();
-        playerOneTable.row();
-        playerOneTable.add(deckZone);
-        playerOneTable.row();
-        playerOneTable.add(fieldZone);
-        playerOneTable.row();
-        playerOneTable.add(graveyardZone).left();
-        playerOneTable.row();
-        playerOneTable.add(handZone);
-        playerOneTable.row();
-        playerOneTable.add(creatureZone);
-        playerOneTable.row();
-        playerOneTable.add(spellZone);
-        playerOneTable.row();
-        playerOneTable.add(lifeZone).bottom().maxWidth(10);
 
         return playerOneTable;
     }
 
-    private Table drawPlayer2() {
+    private Table drawPlayer2(Table playerTwoTable) {
         Gdx.app.log("DrawField", "drawPlayer2");
-        Table playerTwoTable = new Table();
         //playerTwoTable.setFillParent(true);
         playerTwoTable.setDebug(true);
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+
 
         TextButton playerTwo = new TextButton("Player 2", skin);
         TextButton deckZone = new TextButton("Deck Zone", skin);
@@ -89,13 +110,13 @@ public class DrawField {
         TextButton spellZone = new TextButton("Spell Zone", skin);
         TextButton exitButton = new TextButton("Exit", skin);
 
-        playerTwoTable.add(playerTwo).top();
+        playerTwoTable.add(playerTwo);
         playerTwoTable.row();
-        playerTwoTable.add(deckZone).fillX().uniformX();
+        playerTwoTable.add(deckZone);
         playerTwoTable.row();
-        playerTwoTable.add(fieldZone).fillX().uniformX();
+        playerTwoTable.add(fieldZone);
         playerTwoTable.row();
-        playerTwoTable.add(graveyardZone).fillX().uniformX();
+        playerTwoTable.add(graveyardZone);
 
         return playerTwoTable;
     }

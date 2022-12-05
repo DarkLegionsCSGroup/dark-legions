@@ -21,7 +21,7 @@ import com.darklegions.game.utils.Constants;
 public class MenuScreen extends AbstractGameScreen {
     public static final String TAG = MenuScreen.class.getName();
     private Stage stage;
-    private DarkLegions parent;
+    private DarkLegions parent =  (DarkLegions) Gdx.app.getApplicationListener();
     public SpriteBatch batch = new SpriteBatch();
     public ShapeRenderer shapeRenderer = new ShapeRenderer();
     //public static Sprite backgroundSprite;
@@ -123,6 +123,7 @@ public class MenuScreen extends AbstractGameScreen {
                 parent.changeScreen(DarkLegions.APPLICATION);
             }
         });
+
         options.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
