@@ -17,7 +17,7 @@ import com.darklegions.game.menu.Options;
 import com.darklegions.game.utils.Assets;
 
 public class DarkLegions extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	Texture img;
 	public ShapeRenderer shapeRenderer;
 	BitmapFont font;
@@ -57,13 +57,13 @@ public class DarkLegions extends Game {
 			case APPLICATION:
 				if(mainScreen == null) mainScreen = new MainScreen(this);
 				this.setScreen(mainScreen);
-				Gdx.app.debug("DarkLegions", "Application");
+				//Gdx.app.debug("DarkLegions", "Application");
 				//
 				break;
 			case ENDGAME:
 				if(endScreen == null) endScreen = new EndScreen(this);
 				this.setScreen(endScreen);
-				Gdx.app.debug("DarkLegions", "EndGame");
+				//Gdx.app.debug("DarkLegions", "EndGame");
 				break;
 		}
 	}
