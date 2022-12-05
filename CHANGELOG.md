@@ -1,5 +1,13 @@
 # semantic Versioning Changelog
 
+## [1.2.1](https://github.com/johnclark96/dark-legions/compare/v1.2.0...v1.2.1) (2022-12-05)
+
+
+### Bug Fixes
+
+* **menu:** missing isFullScreen Options ([da516f4](https://github.com/johnclark96/dark-legions/commit/da516f4304ce948a2faf2659ca06beed780a725a))
+* **menu:** updated options screen ([eb21786](https://github.com/johnclark96/dark-legions/commit/eb217860fe2ae48d37ee75af1552451a42c3cb81))
+
 # [1.2.0](https://github.com/johnclark96/dark-legions/compare/v1.1.0...v1.2.0) (2022-11-30)
 
 
