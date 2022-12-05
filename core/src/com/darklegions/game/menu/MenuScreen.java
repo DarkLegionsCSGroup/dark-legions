@@ -1,7 +1,6 @@
 package com.darklegions.game.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,9 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.darklegions.game.DarkLegions;
 import com.darklegions.game.utils.Constants;
 
@@ -22,8 +21,7 @@ public class MenuScreen extends AbstractGameScreen {
     public static final String TAG = MenuScreen.class.getName();
     private Stage stage;
     private DarkLegions parent =  (DarkLegions) Gdx.app.getApplicationListener();
-    public SpriteBatch batch = new SpriteBatch();
-    public ShapeRenderer shapeRenderer = new ShapeRenderer();
+    //public SpriteBatch batch = new SpriteBatch();
     //public static Sprite backgroundSprite;
     //TODO: GET A NEW BACKGROUND IMAGE TO FIT AND SCALE PROPERLY
 
@@ -32,13 +30,12 @@ public class MenuScreen extends AbstractGameScreen {
 
     //Options
     private Window winOptions; //Window for options
-    private TextButton btnWinOptSave; //Save
-    private TextButton btnWinClose; //Close the options window
     private CheckBox chkSound;
     private Slider sldSound;
     private CheckBox chkMusic;
     private Slider sldMusic;
     private CheckBox chkShowFpsCounter;
+    private CheckBox chkShowFullScreen;
 
     Texture background = new Texture(Gdx.files.internal("concept.png"));
     Sprite backgroundSprite = new Sprite(background);
@@ -71,23 +68,6 @@ public class MenuScreen extends AbstractGameScreen {
         layer.add(new Image(backgroundSprite));
         return layer;
     }
-//    private Table buildObjectsLayer () {
-//        return new Table();
-//    }
-//    private Table buildLogosLayer () {
-////        Table layer = new Table();
-////        layer.left().top();
-////        // + Game Logo
-////        Image imgLogo = new Image(skin, "logo");
-////        layer.add(imgLogo);
-////        layer.row().expandY();
-////        // + Info Logos
-////        Image imgInfo = new Image(skin, "info");
-////        layer.add(imgInfo).bottom();
-////        if(debugEnabled) layer.debug();
-////        return layer;
-//    }
-
     private Table buildLeftMenuLayer() {
         Table layer = new Table();
         /* BUTTONS FOR THE MAIN MENU */
@@ -158,7 +138,12 @@ public class MenuScreen extends AbstractGameScreen {
         chkMusic.setChecked(prefs.music);
         sldMusic.setValue(prefs.musicVolume);
         chkShowFpsCounter.setChecked(prefs.showFpsCounter);
+        chkShowFullScreen.setChecked(prefs.isFullScreen);
+
     }
+
+    //Check if fullscreen is true or false
+
 
     private void saveSettings() {
         Options prefs = Options.instance;
@@ -167,18 +152,33 @@ public class MenuScreen extends AbstractGameScreen {
         prefs.music = chkMusic.isChecked();
         prefs.musicVolume = sldMusic.getValue();
         prefs.showFpsCounter = chkShowFpsCounter.isChecked();
+        prefs.isFullScreen = chkShowFullScreen.isChecked();
         prefs.save();
     }
 
     // debug
     private final float DEBUG_REBUILD_INTERVAL = 5.0f;
     private final boolean debugEnabled = false;
+
     private float debugRebuildStage;
 
     private void onSaveClicked() {
         saveSettings();
         //hideOptionsWindow();
     }
+
+    //Get fullscreen boolean value
+
+    private void isFullScreenChecked() {
+        if(chkShowFullScreen.isChecked()) {
+            Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+        } else {
+            Gdx.graphics.setWindowedMode(800, 480);
+        }
+    }
+    
+    //Set Fullscreen
+    
 
     private Table buildOptWinAudioSettings() {
         Table tbl = new Table();
@@ -216,15 +216,19 @@ public class MenuScreen extends AbstractGameScreen {
         // + Checkbox, "Show FPS Counter" label
         chkShowFpsCounter = new CheckBox("", skin);
         tbl.add(new Label("Show FPS Counter", skin));
+        chkShowFullScreen = new CheckBox("", skin);
         tbl.add(chkShowFpsCounter);
         tbl.row();
+        tbl.add(new Label("Set FullScreen", skin));
+        tbl.add(chkShowFullScreen);
         return tbl;
     }
 
+    //
     private Table buildOptWinButtons () {
         Table tbl = new Table();
         // + Separator
-        Label lbl = null;
+        Label lbl;
         lbl = new Label("", skin);
         lbl.setColor(0.75f, 0.75f, 0.75f, 1);
         lbl.setStyle(new Label.LabelStyle(lbl.getStyle()));
@@ -238,25 +242,52 @@ public class MenuScreen extends AbstractGameScreen {
         tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 1, 5, 0);
         tbl.row();
         // + Save Button with event handler
-        btnWinOptSave = new TextButton("Save", skin);
+        //Save
+        TextButton btnWinOptSave = new TextButton("Save", skin);
         tbl.add(btnWinOptSave).padRight(30);
+        //Close the options window
+        TextButton btnWinClose = new TextButton("Close", skin);
+        tbl.add(btnWinClose).padLeft(30);
         btnWinOptSave.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 onSaveClicked();
+            }
+        });
+        btnWinClose.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                hideOptionsWindow();
+            }
+        });
+
+        chkShowFullScreen.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.debug("MenuScreen", "chkShowFullScreen checked" + chkShowFullScreen.isChecked());
+                isFullScreenChecked();
 
             }
         });
+
         return tbl;
     }
-        // + Cancel Button with event handler
+
+    private void hideOptionsWindow() {
+        winOptions.setVisible(false);
+    }
+
+    // + Cancel Button with event handler
         //create the window with the title
         private Window buildOptionsWindowLayer() {
             winOptions = new Window("Options", skin);
+            //Center the winOptions text in the title
+            winOptions.getTitleLabel().setAlignment(Align.center);
             // + Audio Settings: Sound/Music CheckBox and Volume Slider
             winOptions.add(buildOptWinAudioSettings()).row();
             // + Debug: Show FPS Counter
             winOptions.add(buildOptWinDebug()).row();
+            winOptions.add();
             // + Separator and Buttons (Save, Cancel)
             winOptions.add(buildOptWinButtons()).pad(10, 0, 10, 0);
 
@@ -271,6 +302,7 @@ public class MenuScreen extends AbstractGameScreen {
             //Get current viewport size
             float width = Gdx.graphics.getWidth();
             winOptions.setPosition(  width - winOptions.getWidth() - 50, 50);
+            winOptions.setMovable(false);
             return winOptions;
         }
         // + Cancel Button with event handler
@@ -298,10 +330,8 @@ public class MenuScreen extends AbstractGameScreen {
         stage.addActor(table); //Creates the table to be added to the stage
 
         //stage.addActor(OptionWindow);
-
         /* BUTTON LISTENERS END */
         stage.draw();
-
     }
 
     @Override
@@ -362,6 +392,7 @@ public class MenuScreen extends AbstractGameScreen {
         Gdx.input.setInputProcessor(stage);
         rebuildStage();
     }
+
 
     @Override
     public void dispose() {
