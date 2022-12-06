@@ -43,6 +43,7 @@ public class MenuScreen extends AbstractGameScreen {
     private void rebuildStage () {
         // build all layers
         Table layerBackground = buildBackgroundLayer();
+        //TODO: Add a LOGO
 //        Table layerLogos = buildLogosLayer();
         Table layerControls = buildControlsLayer();
         Table layerLeftMenu = buildLeftMenuLayer();
@@ -57,6 +58,7 @@ public class MenuScreen extends AbstractGameScreen {
 //        stack.add(layerLogos);
         stack.add(layerLeftMenu);
         stack.add(layerControls);
+        stage.setDebugAll(false); // remove later
         stage.addActor(layerOptionsWindow);
     }
 
@@ -123,6 +125,7 @@ public class MenuScreen extends AbstractGameScreen {
                 Gdx.app.exit();
             }
         });
+        layer.setDebug(false);
         return layer;
     }
 
@@ -141,9 +144,6 @@ public class MenuScreen extends AbstractGameScreen {
         chkShowFullScreen.setChecked(prefs.isFullScreen);
 
     }
-
-    //Check if fullscreen is true or false
-
 
     private void saveSettings() {
         Options prefs = Options.instance;
@@ -176,9 +176,6 @@ public class MenuScreen extends AbstractGameScreen {
             Gdx.graphics.setWindowedMode(800, 480);
         }
     }
-    
-    //Set Fullscreen
-    
 
     private Table buildOptWinAudioSettings() {
         Table tbl = new Table();
@@ -202,6 +199,7 @@ public class MenuScreen extends AbstractGameScreen {
         sldMusic = new Slider(0.0f, 1.0f, 0.1f, false, skin);
         tbl.add(sldMusic);
         tbl.row();
+        tbl.setDebug(false);
         return tbl;
     }
 
@@ -221,6 +219,7 @@ public class MenuScreen extends AbstractGameScreen {
         tbl.row();
         tbl.add(new Label("Set FullScreen", skin));
         tbl.add(chkShowFullScreen);
+        tbl.setDebug(false);
         return tbl;
     }
 
@@ -241,19 +240,23 @@ public class MenuScreen extends AbstractGameScreen {
         lbl.getStyle().background = skin.newDrawable("white");
         tbl.add(lbl).colspan(2).height(1).width(220).pad(0, 1, 5, 0);
         tbl.row();
-        // + Save Button with event handler
-        //Save
+
+        //Save button
         TextButton btnWinOptSave = new TextButton("Save", skin);
         tbl.add(btnWinOptSave).padRight(30);
         //Close the options window
         TextButton btnWinClose = new TextButton("Close", skin);
         tbl.add(btnWinClose).padLeft(30);
+
+        // Listener for the save button
         btnWinOptSave.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 onSaveClicked();
             }
         });
+
+        // Listener for the close button
         btnWinClose.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -261,6 +264,7 @@ public class MenuScreen extends AbstractGameScreen {
             }
         });
 
+        //Lister to check if fullscreen is checked
         chkShowFullScreen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -269,10 +273,12 @@ public class MenuScreen extends AbstractGameScreen {
 
             }
         });
+        tbl.setDebug(false);
 
         return tbl;
     }
 
+    //Sets the options window to be hidden
     private void hideOptionsWindow() {
         winOptions.setVisible(false);
     }
@@ -287,7 +293,6 @@ public class MenuScreen extends AbstractGameScreen {
             winOptions.add(buildOptWinAudioSettings()).row();
             // + Debug: Show FPS Counter
             winOptions.add(buildOptWinDebug()).row();
-            winOptions.add();
             // + Separator and Buttons (Save, Cancel)
             winOptions.add(buildOptWinButtons()).pad(10, 0, 10, 0);
 
@@ -303,6 +308,7 @@ public class MenuScreen extends AbstractGameScreen {
             float width = Gdx.graphics.getWidth();
             winOptions.setPosition(  width - winOptions.getWidth() - 50, 50);
             winOptions.setMovable(false);
+            winOptions.setDebug(false);
             return winOptions;
         }
         // + Cancel Button with event handler
@@ -320,12 +326,9 @@ public class MenuScreen extends AbstractGameScreen {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
 
-        //Get the OptionWindow Class to work
-        final OptionWindow optionWindow = new OptionWindow(parent);
-
         Table table = new Table();
         table.setFillParent(true); //table is set to fill the stage
-        table.setDebug(true); // This is optional, but enables debug lines for tables.
+        table.setDebug(false); // This is optional, but enables debug lines for tables.
 
         stage.addActor(table); //Creates the table to be added to the stage
 
