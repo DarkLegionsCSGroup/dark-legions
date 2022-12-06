@@ -1,5 +1,12 @@
 # semantic Versioning Changelog
 
+## [1.2.2](https://github.com/johnclark96/dark-legions/compare/v1.2.1...v1.2.2) (2022-12-06)
+
+
+### Bug Fixes
+
+* **optmenu:** fixed options having a large space ([98eeb01](https://github.com/johnclark96/dark-legions/commit/98eeb01e94199c755a0dd7c85b7e70b7406e8126))
+
 ## [1.2.1](https://github.com/johnclark96/dark-legions/compare/v1.2.0...v1.2.1) (2022-12-05)
 
 
