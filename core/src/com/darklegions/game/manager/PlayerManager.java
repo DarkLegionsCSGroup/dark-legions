@@ -52,7 +52,6 @@ public class PlayerManager {
         playerDeck = insertDeck;
         this.playerImage = new Texture(Gdx.files.internal("concept.png"));
         init();
-        drawPlayerHand();
     }
 
     public PlayerManager() {
