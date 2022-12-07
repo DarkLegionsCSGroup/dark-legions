@@ -3,9 +3,12 @@ package com.darklegions.game.manager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Deck;
 
 import java.util.ArrayList;
+
+import javax.smartcardio.Card;
 
 public class PlayerManager {
     private String playerName;
@@ -22,8 +25,10 @@ public class PlayerManager {
     private Integer mineralTotal;
     private Integer magicTotal;
     private Integer motivationTotal;
+    private ArrayList<Cards> playerHand;
     private Texture playerImage;
     private Deck playerDeck;
+    private final int MAXHANDSIZE = 5;
 
 
     public void init() {
@@ -35,6 +40,7 @@ public class PlayerManager {
         setMineralTotal(10);
         setMagicTotal(10);
         setMotivationTotal(10);
+        drawPlayerHand();
     }
 
     public PlayerManager(Deck insertDeck, String pName, int pID) {
@@ -46,12 +52,24 @@ public class PlayerManager {
         playerDeck = insertDeck;
         this.playerImage = new Texture(Gdx.files.internal("concept.png"));
         init();
+        drawPlayerHand();
     }
 
     public PlayerManager() {
 
     }
 
+    public void drawPlayerHand() {
+        for(int i = 0; i < 5; i++) {
+            playerHand.add(playerDeck.drawDeck());
+        }
+    }
+
+    public void drawOne() {
+        if(playerHand.size() < MAXHANDSIZE) {
+            playerHand.add(playerDeck.drawDeck());
+        }
+    }
     public String getPlayerName() {
         return playerName;
     }
