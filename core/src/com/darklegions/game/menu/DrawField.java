@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.darklegions.game.DarkLegions;
+import com.darklegions.game.manager.GameManager;
+
 import org.w3c.dom.Text;
 
 public class DrawField {
@@ -22,7 +24,7 @@ public class DrawField {
         card3 = new Creature("Dork");
     }
 
-    public Actor createField() {
+    public Actor createField(GameManager currGame) {
         Gdx.app.log("Create", "drawField");
 
 
@@ -34,30 +36,26 @@ public class DrawField {
         gameField.padTop(30);
 
 
-        drawPlayer1(gameField);
+        drawPlayer1(gameField, currGame);
 
         gameField.row();
         gameField.add().size(0, 50);
         gameField.row();
 
-        drawPlayer2(gameField);
+        drawPlayer2(gameField, currGame);
 
         return gameField;
 
     }
 
-    private void drawPlayer1(Table gameField) {
+    private void drawPlayer1(Table gameField, GameManager currGame) {
  /*
                 Button Properties
          */
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;
         float buttonHeight = buttonWidth * 1.3f;
-        TextButton playerOne = new TextButton("Player 1", skin);
-        TextButton handCardOne =  new TextButton("card", skin);
-        TextButton handCardTwo = new TextButton("card", skin);
-        TextButton handCardThree = new TextButton("card", skin);
-        TextButton handCardFour = new TextButton("card", skin);
+        TextButton playerOne = new TextButton(currGame.player1.getPlayerName(), skin);
         TextButton handCardFive = new TextButton("card", skin);
 
         /*
@@ -92,7 +90,7 @@ public class DrawField {
 
     }
 
-    private void drawPlayer2(Table gameField) {
+    private void drawPlayer2(Table gameField, GameManager currGame) {
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;

@@ -28,7 +28,6 @@ public class PlayerManager {
     private ArrayList<Cards> playerHand;
     private Texture playerImage;
     private Deck playerDeck;
-    private final int MAXHANDSIZE = 5;
 
 
     public void init() {
@@ -50,6 +49,7 @@ public class PlayerManager {
         setPlayerID(pID);
         setPlayerName(pName);
         playerDeck = insertDeck;
+        playerHand = new ArrayList<Cards>();
         this.playerImage = new Texture(Gdx.files.internal("concept.png"));
         init();
     }
@@ -65,6 +65,7 @@ public class PlayerManager {
     }
 
     public void drawOne() {
+        int MAXHANDSIZE = 5;
         if(playerHand.size() < MAXHANDSIZE) {
             playerHand.add(playerDeck.drawDeck());
         }
