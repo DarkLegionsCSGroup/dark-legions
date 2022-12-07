@@ -1,13 +1,21 @@
 package com.darklegions.game.gameobjects;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.utils.Align;
 
 import sun.font.TextLabel;
 
@@ -19,11 +27,18 @@ public class Creature extends Actor implements Cards {
     private String cardName;
     private int power;
     private int defend;
+    private Table table;
     private UniqueEffect effectCard;
     public Sprite cardArt;
     public String description;
     private BitmapFont font = new BitmapFont(); //or use alex answer to use custom font
-    private ShapeRenderer shapeRenderer;
+    private Skin skin;
+    private Image background;
+    BackgroundColor backgroundColor = new BackgroundColor("white_texture.png");
+
+    Texture texture;
+
+
     static private boolean projectionMatrixSet;
 
 
@@ -33,7 +48,11 @@ public class Creature extends Actor implements Cards {
         this.power = 3;
         this.defend = 3;
         setDescription("I am a card");
-        shapeRenderer = new ShapeRenderer();
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        table = new Table(skin);
+        texture = new Texture(Gdx.files.internal("concept.png"));
+        background = new Image(texture);
+        backgroundColor.setColor(2, 179, 228, 255); // r, g, b, a
     }
 
     public Creature (String cardName) {
@@ -41,7 +60,11 @@ public class Creature extends Actor implements Cards {
         this.power = 3;
         this.defend = 3;
         setDescription("I am a card");
-        shapeRenderer = new ShapeRenderer();
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        table = new Table(skin);
+        texture = new Texture(Gdx.files.internal("concept.png"));
+        background = new Image(texture);
+        backgroundColor.setColor(200, 0, 0, 255); // r, g, b, a
     }
 
     public String getCardName() {
@@ -84,11 +107,47 @@ public class Creature extends Actor implements Cards {
         this.cardArt = cardArt;
     }
 
-    public void DrawCard(ShapeRenderer shapeRenderer, SpriteBatch batch) {
-        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(15, 15, WIDTH, HEIGHT);
-        shapeRenderer.setColor(Color.WHITE);
+    public Table DrawCard() {
 
+        table.setBackground(backgroundColor);
+        /* Adds the "Cost" label and centers its text. */
+        table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
+        /* Important! Adds a column between "Cost" and "S". Used to
+         * align "Image", "Title", "Description", and "Class". */
+        table.add();
+        /* Same as "Cost". */
+        table.add("S").width(30).height(30).getActor().setAlignment(Align.center);
+        table.row();
+
+        /* Add "Image" to middle column with a height of 50% of the
+         * background's height minus 75 (the top columns height). */
+        table.add();
+        table.add(background).size(100f);
+        table.add();
+        table.row();
+
+        /* Add "Title".*/
+        table.add();
+        table.add(getCardName());
+        table.add();
+        table.row();
+
+        /* Add "Description". */
+        table.add();
+        table.add(getDescription()).grow().getActor().setAlignment(Align.center);
+        table.add();
+        table.row();
+
+        /* Add "Life", "Class", and "Attack". Same deal as "Cost" and
+         * "S" */
+        table.add(Integer.toString(getPower())).width(30).height(30).getActor().setAlignment(Align.center);
+        table.add("").growX().fillY().getActor().setAlignment(Align.center);
+        table.add(Integer.toString(getDefend())).width(30).height(30).getActor().setAlignment(Align.center);
+
+        /* Used to show the table above the background image. You
+         * should probably use Table#setBackground(drawable)
+         * instead of using a stack! */
+        return table;
     }
 
     @Override
@@ -96,14 +155,6 @@ public class Creature extends Actor implements Cards {
 
 
         batch.end();
-
-        if(!projectionMatrixSet){
-            shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-        }
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(0, 0, WIDTH, HEIGHT);
-        shapeRenderer.end();
 
         batch.begin();
 

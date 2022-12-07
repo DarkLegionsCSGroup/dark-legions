@@ -65,13 +65,13 @@ public class Deck {
         shuffleArray(creaturePool);
         shuffleArray(spellPool);
         shuffleArray(structurePool);
-        for(int i = 0; i < MAX_CREATURE; i++) {
+        for(int i = 0; i < creaturePool.length; i++) {
             deck.add(creaturePool[i]);
         }
-        for(int i = 0; i < MAX_SPELL; i++) {
+        for(int i = 0; i < spellPool.length; i++) {
             deck.add(spellPool[i]);
         }
-        for(int i = 0; i < MAX_STRUCTURE; i++) {
+        for(int i = 0; i < structurePool.length; i++) {
             deck.add(structurePool[i]);
         }
 
