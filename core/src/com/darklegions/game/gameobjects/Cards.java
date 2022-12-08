@@ -13,7 +13,7 @@ import com.darklegions.game.DarkLegions;
 public interface Cards {
 
 
-    float HEIGHT = 200;
+    float HEIGHT = 150;
     float WIDTH = 100;
 
 
