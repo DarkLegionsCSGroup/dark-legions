@@ -5,12 +5,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
 
-public class Structure implements Cards {
+public class Structure extends Actor implements Cards {
 
     public String getCardName() {
         return cardName;
@@ -75,6 +78,7 @@ public class Structure implements Cards {
 
         /* Add "Life", "Class", and "Attack". Same deal as "Cost" and
          * "S" */
+
         table.add("MC").width(30).height(30).getActor().setAlignment(Align.center);
         table.add("").growX().fillY().getActor().setAlignment(Align.center);
         table.add("END").width(30).height(30).getActor().setAlignment(Align.center);
@@ -100,10 +104,20 @@ public class Structure implements Cards {
 
     }
 
+    @Override
+    public String getType() {
+        return "Structure";
+    }
+
 
     public Table DrawCard() {
 
         table.setBackground(backgroundColor);
+        table.addListener(new DragListener() {
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                table.moveBy(x - table.getWidth() / 2, y - table.getHeight() / 2);
+            }
+        });
         /* Adds the "Cost" label and centers its text. */
         table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
         /* Important! Adds a column between "Cost" and "S". Used to

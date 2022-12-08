@@ -10,11 +10,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
 
 import sun.font.TextLabel;
@@ -128,6 +131,12 @@ public class Creature extends Actor implements Cards {
     @Override
     public Table drawCard() {
         table.setBackground(backgroundColor);
+        table.setTouchable(Touchable.enabled);
+        table.addListener(new DragListener() {
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                table.moveBy(x - table.getWidth() / 2, y - table.getHeight() / 2);
+            }
+        });
         /* Adds the "Cost" label and centers its text. */
         table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
         /* Important! Adds a column between "Cost" and "S". Used to
@@ -181,5 +190,10 @@ public class Creature extends Actor implements Cards {
     @Override
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String getType() {
+        return "Creature";
     }
 }

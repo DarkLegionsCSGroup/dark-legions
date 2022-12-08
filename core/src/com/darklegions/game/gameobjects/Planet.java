@@ -35,4 +35,9 @@ public class Planet implements Cards {
     public void setDescription(String description) {
 
     }
+
+    @Override
+    public String getType() {
+        return null;
+    }
 }
