@@ -25,7 +25,7 @@ public class MainScreen extends ScreenAdapter {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         newGame = new GameManager();
         DrawField drawField = new DrawField(parent);
-        stage.addActor(drawField.createField());
+        stage.addActor(drawField.createField(newGame));
     }
 
     @Override
