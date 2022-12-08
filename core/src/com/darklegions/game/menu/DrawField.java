@@ -1,10 +1,7 @@
 package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.darklegions.game.gameobjects.Creature;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -14,11 +11,17 @@ import org.w3c.dom.Text;
 
 public class DrawField {
     public DarkLegions parent;
+    public Creature card1;
+    public Creature card2;
+    public Creature card3;
 
     public DrawField(DarkLegions parent) {
         this.parent = parent;
-
+        card1 = new Creature();
+        card2 = new Creature("Eating God");
+        card3 = new Creature("Dork");
     }
+
     public Actor createField() {
         Gdx.app.log("Create", "drawField");
 
@@ -61,10 +64,10 @@ public class DrawField {
               Player Hand
          */
         gameField.add(playerOne);
-        gameField.add(handCardOne).width(buttonWidth).expandX();
-        gameField.add(handCardTwo).width(buttonWidth).expandX();
-        gameField.add(handCardThree).width(buttonWidth).expandX();
-        gameField.add(handCardFour).width(buttonWidth).expandX();
+        gameField.add(card2.DrawCard()).expandX();
+        gameField.add(card1.DrawCard()).expandX();
+        gameField.add(card3.DrawCard()).expandX();
+
         gameField.add(handCardFive).width(buttonWidth).expandX();
 
 

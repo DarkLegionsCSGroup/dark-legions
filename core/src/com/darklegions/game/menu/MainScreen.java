@@ -11,17 +11,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.darklegions.game.DarkLegions;
+import com.darklegions.game.manager.GameManager;
 
 public class MainScreen extends ScreenAdapter {
     DarkLegions parent;
     Stage stage;
     OrthographicCamera camera;
+    GameManager newGame;
 
     public MainScreen(final DarkLegions parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-
+        newGame = new GameManager();
         DrawField drawField = new DrawField(parent);
         stage.addActor(drawField.createField());
     }
