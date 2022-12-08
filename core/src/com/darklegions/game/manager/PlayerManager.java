@@ -25,6 +25,9 @@ public class PlayerManager {
     private Integer mineralTotal;
     private Integer magicTotal;
     private Integer motivationTotal;
+
+
+
     private ArrayList<Cards> playerHand;
     private Texture playerImage;
     private Deck playerDeck;
@@ -156,6 +159,14 @@ public class PlayerManager {
 
     public void setMotivationTotal(Integer motivationTotal) {
         this.motivationTotal = motivationTotal;
+    }
+
+    public ArrayList<Cards> getPlayerHand() {
+        return playerHand;
+    }
+
+    public void setPlayerHand(ArrayList<Cards> playerHand) {
+        this.playerHand = playerHand;
     }
 
 

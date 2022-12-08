@@ -19,18 +19,6 @@ public class Deck {
     private static final int MAX_CREATURE = 20;
     private static final int MAX_SPELL = 10;
 
-    public ArrayList<Cards> getDeck() {
-        return deck;
-    }
-
-    public void setDeck(ArrayList<Cards> deck) {
-        this.deck = deck;
-    }
-
-    public Cards drawDeck() {
-        return deck.remove(0);
-    }
-
     private ArrayList<Cards> deck;
     private Creature[] creaturePool = new Creature[]{
             new Creature("Captain Bogart"),
@@ -74,7 +62,7 @@ public class Deck {
     }
     //Each deck should contain 10 structures, 10 spells, 20 creatures?
     public Deck() {
-        this.deck = new ArrayList<Cards>();
+        this.deck = new ArrayList<>();
         shuffleArray(creaturePool);
         shuffleArray(spellPool);
         shuffleArray(structurePool);
@@ -88,5 +76,16 @@ public class Deck {
             deck.add(structurePool[i]);
         }
 
+    }
+    public ArrayList<Cards> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(ArrayList<Cards> deck) {
+        this.deck = deck;
+    }
+
+    public Cards drawDeck() {
+        return deck.remove(0);
     }
 }

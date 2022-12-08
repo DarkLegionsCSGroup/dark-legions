@@ -107,8 +107,26 @@ public class Creature extends Actor implements Cards {
         this.cardArt = cardArt;
     }
 
-    public Table DrawCard() {
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
 
+
+        batch.end();
+
+        batch.begin();
+
+        font.setColor(Color.WHITE);
+        font.draw(batch, getCardName(), 200, 300);
+
+    }
+
+    @Override
+    public Sprite getSpriteCardBack() {
+        return null;
+    }
+
+    @Override
+    public Table drawCard() {
         table.setBackground(backgroundColor);
         /* Adds the "Cost" label and centers its text. */
         table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
@@ -148,29 +166,6 @@ public class Creature extends Actor implements Cards {
          * should probably use Table#setBackground(drawable)
          * instead of using a stack! */
         return table;
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-
-
-        batch.end();
-
-        batch.begin();
-
-        font.setColor(Color.WHITE);
-        font.draw(batch, getCardName(), 200, 300);
-
-    }
-
-    @Override
-    public Sprite getSpriteCardBack() {
-        return null;
-    }
-
-    @Override
-    public void drawCard(SpriteBatch batch, ShapeRenderer shape) {
-
     }
 
     @Override
