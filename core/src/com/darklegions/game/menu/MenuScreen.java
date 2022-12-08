@@ -102,6 +102,7 @@ public class MenuScreen extends AbstractGameScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.log("MenuScreen", "New Game Button Clicked");
+                //parent.changeScreen(DarkLegions.APPLICATION);
                 parent.changeScreen(DarkLegions.APPLICATION);
             }
         });
@@ -284,34 +285,34 @@ public class MenuScreen extends AbstractGameScreen {
     }
 
     // + Cancel Button with event handler
-        //create the window with the title
-        private Window buildOptionsWindowLayer() {
-            winOptions = new Window("Options", skin);
-            //Center the winOptions text in the title
-            winOptions.getTitleLabel().setAlignment(Align.center);
-            // + Audio Settings: Sound/Music CheckBox and Volume Slider
-            winOptions.add(buildOptWinAudioSettings()).row();
-            // + Debug: Show FPS Counter
-            winOptions.add(buildOptWinDebug()).row();
-            // + Separator and Buttons (Save, Cancel)
-            winOptions.add(buildOptWinButtons()).pad(10, 0, 10, 0);
+    //create the window with the title
+    private Window buildOptionsWindowLayer() {
+        winOptions = new Window("Options", skin);
+        //Center the winOptions text in the title
+        winOptions.getTitleLabel().setAlignment(Align.center);
+        // + Audio Settings: Sound/Music CheckBox and Volume Slider
+        winOptions.add(buildOptWinAudioSettings()).row();
+        // + Debug: Show FPS Counter
+        winOptions.add(buildOptWinDebug()).row();
+        // + Separator and Buttons (Save, Cancel)
+        winOptions.add(buildOptWinButtons()).pad(10, 0, 10, 0);
 
-            // Make options window slightly transparent
-            winOptions.setColor(1, 1, 1, 0.8f);
-            // Hide options window by default
-            winOptions.setVisible(false);
-            if (debugEnabled) winOptions.debug();
-            // Let TableLayout recalculate widget sizes and positions
-            winOptions.pack();
-            // Move options window to bottom right corner
-            //Get current viewport size
-            float width = Gdx.graphics.getWidth();
-            winOptions.setPosition(  width - winOptions.getWidth() - 50, 50);
-            winOptions.setMovable(false);
-            winOptions.setDebug(false);
-            return winOptions;
-        }
-        // + Cancel Button with event handler
+        // Make options window slightly transparent
+        winOptions.setColor(1, 1, 1, 0.8f);
+        // Hide options window by default
+        winOptions.setVisible(false);
+        if (debugEnabled) winOptions.debug();
+        // Let TableLayout recalculate widget sizes and positions
+        winOptions.pack();
+        // Move options window to bottom right corner
+        //Get current viewport size
+        float width = Gdx.graphics.getWidth();
+        winOptions.setPosition(  width - winOptions.getWidth() - 50, 50);
+        winOptions.setMovable(false);
+        winOptions.setDebug(false);
+        return winOptions;
+    }
+    // + Cancel Button with event handler
 //        btnWinOptCancel = new TextButton("Cancel", skinLibgdx);
 //        tbl.add(btnWinOptCancel);
 //        btnWinOptCancel.addListener(new ChangeListener() {

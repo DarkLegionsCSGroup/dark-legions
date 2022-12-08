@@ -37,6 +37,10 @@ public class DarkLegions extends Game {
 	public final static int APPLICATION = 2;
 	public final static int ENDGAME = 3;
 
+	private void newGame() {
+		this.mainScreen = new MainScreen(this);
+	}
+
 	public DarkLegions() {
 	}
 
@@ -49,14 +53,20 @@ public class DarkLegions extends Game {
 			case MENU:
 				if(menuScreen == null) menuScreen = new MenuScreen(this);
 				this.setScreen(menuScreen);
+				Gdx.app.debug("DarkLegions", "New Game");
 				break;
 //			case OPTIONS:
 //				if(optionScreen == null) optionScreen = new OptionScreen(this);
 //				this.setScreen(optionScreen);
 //				break;
 			case APPLICATION:
-				if(mainScreen == null) mainScreen = new MainScreen(this);
-				this.setScreen(mainScreen);
+				if(mainScreen == null) {
+					mainScreen = new MainScreen(this);
+					this.setScreen(mainScreen);
+				} else {
+					mainScreen = new MainScreen(this);
+					this.setScreen(mainScreen);
+				}
 				//Gdx.app.debug("DarkLegions", "Application");
 				//
 				break;
@@ -83,7 +93,6 @@ public class DarkLegions extends Game {
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
 	}
-
 
 	@Override
 	public void render() {
