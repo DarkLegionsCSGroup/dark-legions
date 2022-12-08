@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.darklegions.game.DarkLegions;
 
@@ -21,7 +22,7 @@ public interface Cards {
 
 
     public Sprite getSpriteCardBack();
-    public void drawCard(SpriteBatch batch, ShapeRenderer shape);
+    public Table drawCard();
     public void setSpriteCardBack(Sprite spriteCardBack);
     public String getDescription();
     public void setDescription(String description);

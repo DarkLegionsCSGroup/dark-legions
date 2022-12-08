@@ -39,26 +39,7 @@ public class Spell implements Cards {
     }
 
     @Override
-    public void drawCard(SpriteBatch batch, ShapeRenderer shape) {
-
-    }
-
-    @Override
-    public void setSpriteCardBack(Sprite spriteCardBack) {
-
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-
-    }
-
-    public Table DrawCard() {
+    public Table drawCard() {
 
         table.setBackground(backgroundColor);
         /* Adds the "Cost" label and centers its text. */
@@ -99,6 +80,21 @@ public class Spell implements Cards {
          * should probably use Table#setBackground(drawable)
          * instead of using a stack! */
         return table;
+    }
+
+    @Override
+    public void setSpriteCardBack(Sprite spriteCardBack) {
+
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+
     }
 
     public String getCardName() {

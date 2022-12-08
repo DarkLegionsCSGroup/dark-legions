@@ -3,6 +3,8 @@ package com.darklegions.game.gameobjects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 
 public class Planet implements Cards {
     private UniqueEffect effectCard;
@@ -14,8 +16,9 @@ public class Planet implements Cards {
     }
 
     @Override
-    public void drawCard(SpriteBatch batch, ShapeRenderer shape) {
+    public Table drawCard() {
 
+        return null;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class DrawField {
         gameField.defaults().pad(10);
         gameField.left().top();
         gameField.setFillParent(true);
-        gameField.setDebug(true);
+        gameField.setDebug(false);
         gameField.padTop(30);
 
 
@@ -62,11 +62,12 @@ public class DrawField {
               Player Hand
          */
         gameField.add(playerOne);
-        gameField.add(card2.DrawCard()).expandX();
-        gameField.add(card1.DrawCard()).expandX();
-        gameField.add(card3.DrawCard()).expandX();
+        for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
+            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).expandX().width(buttonWidth);
+        }
 
-        gameField.add(handCardFive).width(buttonWidth).expandX();
+
+        //gameField.add(handCardFive).width(buttonWidth).expandX();
 
 
         /*
@@ -92,10 +93,11 @@ public class DrawField {
 
     private void drawPlayer2(Table gameField, GameManager currGame) {
 
+
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;
         float buttonHeight = buttonWidth * 1.3f;
-        TextButton playerTwo = new TextButton("Player 2", skin);
+        TextButton playerTwo = new TextButton(currGame.player2.getPlayerName(), skin);
 
         Table creatureZoneP2 = new Table();
         TextButton deckZoneP2 = new TextButton("Deck Zone", skin);
@@ -114,18 +116,11 @@ public class DrawField {
 
         gameField.row();
 
-        TextButton handCardOneP2 =  new TextButton("card", skin);
-        TextButton handCardTwoP2 = new TextButton("card", skin);
-        TextButton handCardThreeP2 = new TextButton("card", skin);
-        TextButton handCardFourP2 = new TextButton("card", skin);
-        TextButton handCardFiveP2 = new TextButton("card", skin);
+        for(int i = 0; i < currGame.player2.getPlayerHand().size(); i++) {
+            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).expandX().width(buttonWidth);
+        }
 
         gameField.add(playerTwo);
-        gameField.add(handCardOneP2).width(buttonWidth).expandX();
-        gameField.add(handCardTwoP2).width(buttonWidth).expandX();
-        gameField.add(handCardThreeP2).width(buttonWidth).expandX();
-        gameField.add(handCardFourP2).width(buttonWidth).expandX();
-        gameField.add(handCardFiveP2).width(buttonWidth).expandX();
 
     }
 }
