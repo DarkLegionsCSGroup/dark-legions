@@ -1,6 +1,9 @@
 package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Creature;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -36,6 +39,7 @@ public class DrawField {
         gameField.padTop(30);
 
 
+
         drawPlayer1(gameField, currGame);
 
         gameField.row();
@@ -55,17 +59,18 @@ public class DrawField {
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;
         float buttonHeight = buttonWidth * 1.3f;
-        TextButton playerOne = new TextButton(currGame.player1.getPlayerName(), skin);
+        final TextButton playerOne = new TextButton(currGame.player1.getPlayerName(), skin);
         TextButton handCardFive = new TextButton("card", skin);
 
         /*
               Player Hand
          */
+
+
         gameField.add(playerOne);
-        for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
+        for(int i = 0; i < currGame.player1.getPlayerHand().size() - 1; i++) {
             gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).expandX().width(buttonWidth);
         }
-
 
         //gameField.add(handCardFive).width(buttonWidth).expandX();
 

@@ -2,13 +2,11 @@ package com.darklegions.game.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Deck;
 
 import java.util.ArrayList;
-
-import javax.smartcardio.Card;
+import java.util.List;
 
 public class PlayerManager {
     private String playerName;
@@ -18,7 +16,7 @@ public class PlayerManager {
     private int playerID;
     private long totalWins;
     private long totalLosses;
-    private ArrayList<String> Achievements = new ArrayList<String>();
+    private ArrayList<String> Achievements = new ArrayList<>();
     private boolean isTurn;
     private int capacityResources;
     private Integer healthTotal;
@@ -28,7 +26,7 @@ public class PlayerManager {
 
 
 
-    private ArrayList<Cards> playerHand;
+    private List<Cards> playerHand;
     private Texture playerImage;
     private Deck playerDeck;
 
@@ -52,7 +50,7 @@ public class PlayerManager {
         setPlayerID(pID);
         setPlayerName(pName);
         playerDeck = insertDeck;
-        playerHand = new ArrayList<Cards>();
+        playerHand = new ArrayList<>();
         this.playerImage = new Texture(Gdx.files.internal("concept.png"));
         init();
     }
@@ -161,11 +159,11 @@ public class PlayerManager {
         this.motivationTotal = motivationTotal;
     }
 
-    public ArrayList<Cards> getPlayerHand() {
+    public List<Cards> getPlayerHand() {
         return playerHand;
     }
 
-    public void setPlayerHand(ArrayList<Cards> playerHand) {
+    public void setPlayerHand(List<Cards> playerHand) {
         this.playerHand = playerHand;
     }
 

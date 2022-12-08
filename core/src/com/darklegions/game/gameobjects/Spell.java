@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
 
-public class Spell implements Cards {
+public class Spell extends Actor implements Cards {
     private String cardName;
     private UniqueEffect effectCard;
     private Table table;
@@ -42,6 +45,11 @@ public class Spell implements Cards {
     public Table drawCard() {
 
         table.setBackground(backgroundColor);
+        table.addListener(new DragListener() {
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                table.moveBy(x - table.getWidth() / 2, y - table.getHeight() / 2);
+            }
+        });
         /* Adds the "Cost" label and centers its text. */
         table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
         /* Important! Adds a column between "Cost" and "S". Used to
@@ -97,6 +105,11 @@ public class Spell implements Cards {
 
     }
 
+    @Override
+    public String getType() {
+        return "Spell";
+    }
+
     public String getCardName() {
         return cardName;
     }
@@ -144,4 +157,6 @@ public class Spell implements Cards {
     public void setBackground(Image background) {
         this.background = background;
     }
+
+
 }

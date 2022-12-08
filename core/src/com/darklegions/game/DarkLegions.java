@@ -84,6 +84,7 @@ public class DarkLegions extends Game {
 		font = new BitmapFont();
 	}
 
+
 	@Override
 	public void render() {
 		super.render();
