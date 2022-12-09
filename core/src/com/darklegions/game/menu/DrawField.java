@@ -28,7 +28,7 @@ public class DrawField {
 
         Table gameField = new Table();
         //gameField.defaults().pad(10);
-        gameField.defaults().width(50).height(100).uniform();
+        gameField.defaults().width(200).height(180).expand().uniform();
         gameField.left().top();
         gameField.setFillParent(true);
         gameField.setDebug(true);
@@ -62,9 +62,9 @@ public class DrawField {
         /*
               Player Hand
          */
-        gameField.add(playerOne).width(200).height(100).uniform();
+        gameField.add(playerOne).width(150).height(100).expand().uniform();
         for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).expand().width(cardWidth).height(cardHeight).uniform();
+            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
         }
 
 
@@ -74,7 +74,7 @@ public class DrawField {
         /*
             Creature and Deck Zone
          */
-        gameField.row().height(150);
+        gameField.row().width(200).height(150).expand().uniform();
         Table creatureZone = new Table();
         TextButton deckZone = new TextButton("Deck Zone", skin);
         TextButton creatureCard = new TextButton("Card", skin);
@@ -83,16 +83,16 @@ public class DrawField {
         TextButton creatureCard4 = new TextButton("Card", skin);
         TextButton graveZone = new TextButton("Graveyard", skin);
 
-        creatureZone.defaults().space(10).width(100).height(175).uniform();
-
+        creatureZone.defaults().space(10).width(200).height(175).expand().uniform();
 
         gameField.add(creatureZone).colspan(6);
-        creatureZone.add(deckZone);
+        creatureZone.add(graveZone);
         creatureZone.add(creatureCard);
         creatureZone.add(creatureCard2);
         creatureZone.add(creatureCard3);
         creatureZone.add(creatureCard4);
-        creatureZone.add(graveZone);
+        creatureZone.add(deckZone);
+        creatureZone.toBack();
         creatureZone.setDebug(true);
 
     }
@@ -115,22 +115,23 @@ public class DrawField {
         TextButton creatureCard4P2 = new TextButton("Card", skin);
         TextButton graveZoneP2 = new TextButton("Graveyard", skin);
 
-        creatureZoneP2.defaults().space(10).width(100).height(175).uniform();
+        creatureZoneP2.defaults().space(10).width(200).height(180).expand().uniform();
 
 
-        gameField.add(creatureZoneP2).colspan(6);
+        gameField.add(creatureZoneP2).colspan(6).fill();
         creatureZoneP2.add(deckZoneP2);
         creatureZoneP2.add(creatureCardP2);
         creatureZoneP2.add(creatureCard2P2);
         creatureZoneP2.add(creatureCard3P2);
         creatureZoneP2.add(creatureCard4P2);
         creatureZoneP2.add(graveZoneP2);
+        creatureZoneP2.toBack();
         creatureZoneP2.setDebug(true);
 
-        gameField.row().height(150);
+        gameField.row().width(200).height(150).expand().uniform();
 
         for(int i = 0; i < currGame.player2.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).expand().width(cardWidth).height(cardHeight).uniform();
+            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
         }
 
         gameField.add(playerTwo).width(200).height(100).uniform();
