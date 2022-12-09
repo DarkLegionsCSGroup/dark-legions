@@ -53,6 +53,7 @@ public class Creature extends Actor implements Cards {
         this.defend = 3;
         setDescription("I am a card");
         skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        //skin.getFont("font").getData().setScale(0.1f);
         table = new Table(skin);
         texture = new Texture(Gdx.files.internal("concept.png"));
         background = new Image(texture);
@@ -65,6 +66,7 @@ public class Creature extends Actor implements Cards {
         this.defend = 3;
         setDescription("I am a card");
         skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        //skin.getFont("font").getData().setScale(0.1f);
         table = new Table(skin);
         texture = new Texture(Gdx.files.internal("concept.png"));
         background = new Image(texture);
@@ -132,8 +134,9 @@ public class Creature extends Actor implements Cards {
 
     @Override
     public Table drawCard() {
+        skin.getFont("font").getData().setScale(0.3f);
         Label nameLabel = new Label(getCardName(), skin);
-        nameLabel.setScale(0.5f,0.5f);
+        //nameLabel.setScale(0.1f,0.1f);
         table.setBackground(backgroundColor);
         table.setTouchable(Touchable.enabled);
         table.addListener(new DragListener() {
@@ -159,7 +162,7 @@ public class Creature extends Actor implements Cards {
 
         /* Add "Title".*/
         table.add();
-        table.add(nameLabel).width(Cards.WIDTH).getActor().setAlignment(Align.center);
+        table.add(nameLabel).width(Cards.WIDTH).getActor().setAlignment(Align.top);
         table.add();
         table.row();
 

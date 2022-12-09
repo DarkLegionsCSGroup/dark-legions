@@ -25,7 +25,7 @@ public class MenuScreen extends AbstractGameScreen {
     //public static Sprite backgroundSprite;
     //TODO: GET A NEW BACKGROUND IMAGE TO FIT AND SCALE PROPERLY
 
-    private final Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+    private Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
 
     //Options
@@ -75,8 +75,8 @@ public class MenuScreen extends AbstractGameScreen {
         /* BUTTONS FOR THE MAIN MENU */
         //TODO: Disable the gameTitle button or change it to text
         //TextField gameTitleNew = new TextField("Dark Legions", skin); //Was testing TextField instead of TextButton
-        TextButton gameTitle = new TextButton("Dark Legions", skin);
-        gameTitle.setDisabled(true);
+        Label gameTitle = new Label("Dark Legions", skin, "title");
+        //gameTitle.setDisabled(true);
         TextButton newGame = new TextButton("New Game", skin);
         TextButton gallery = new TextButton("Gallery", skin);
         TextButton options = new TextButton("Options", skin);

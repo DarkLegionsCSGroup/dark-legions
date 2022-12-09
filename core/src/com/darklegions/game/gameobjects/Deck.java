@@ -35,7 +35,8 @@ public class Deck {
             new Creature("Fire Giant"),
             new Creature("Mineral Worker"),
             new Creature("Magic Cultist"),
-            new Creature("Political Guide")
+            new Creature("Political Guide"),
+            //new Creature("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
     };
 
     private Structure[] structurePool = new Structure[]{
