@@ -1,6 +1,10 @@
 package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Creature;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -9,7 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.darklegions.game.DarkLegions;
 import com.darklegions.game.manager.GameManager;
 
+import org.w3c.dom.Text;
+
 public class DrawField {
+
     public DarkLegions parent;
     public Creature card1;
     public Creature card2;
@@ -47,7 +54,7 @@ public class DrawField {
 
     }
 
-    private void drawPlayer1(Table gameField, GameManager currGame) {
+    private void drawPlayer1(final Table gameField, final GameManager currGame) {
  /*
                 Button Properties
          */
@@ -56,13 +63,40 @@ public class DrawField {
         float buttonHeight = buttonWidth * 1.0f;
         float cardHeight = Cards.HEIGHT;
         float cardWidth = Cards.WIDTH;
+        /*
+             Adding Player Stats and click listeners
+         */
+
+        Label label1 = new Label(currGame.player1.getPlayerName(), skin);
+        final Label label2 = new Label("Health: " + currGame.player1.getHealthTotal(), skin);
+
+        ClickListener clickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(currGame.player1.getHealthTotal() < 1) {
+                    Gdx.app.exit();
+                }
+                currGame.player1.setHealthTotal(currGame.player1.getHealthTotal() - 1);
+                label2.setText("Health: " + currGame.player1.getHealthTotal());
+            };
+        };
+
+        Window window = new Window("           P1", skin);
+        window.add(label1).pad(0, 0, 0, 0).row();
+        window.add(label2).pad(0, 0, 0, 0).row();
+        TextButton phase = new TextButton("Sub Health", skin);
+        phase.addListener(clickListener);
+        window.add(phase).pad(0, 0, 0, 0).row();
+
+
+
         TextButton playerOne = new TextButton(currGame.player1.getPlayerName(), skin);
         TextButton handCardFive = new TextButton("card", skin);
 
         /*
               Player Hand
          */
-        gameField.add(playerOne).width(150).height(100).expand().uniform();
+        gameField.add(window).width(220).height(150).expand().uniform();
         for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
             gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
         }
@@ -97,7 +131,7 @@ public class DrawField {
 
     }
 
-    private void drawPlayer2(Table gameField, GameManager currGame) {
+    private void drawPlayer2(Table gameField, final GameManager currGame) {
 
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
@@ -134,7 +168,33 @@ public class DrawField {
             gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
         }
 
-        gameField.add(playerTwo).width(200).height(100).uniform();
+
+        // ClickListener clickListener;
+        Label label1 = new Label(currGame.player2.getPlayerName(), skin);
+        final Label label2 = new Label("Health: " + currGame.player2.getHealthTotal(), skin);
+
+        ClickListener clickListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(currGame.player2.getHealthTotal() < 1) {
+                    Gdx.app.exit();
+                }
+                currGame.player2.setHealthTotal(currGame.player2.getHealthTotal() - 1);
+                label2.setText("Health: " + currGame.player2.getHealthTotal());
+            };
+        };
+
+
+
+        Window window = new Window("           P2", skin);
+        window.add(label1).pad(0, 0, 0, 0).row();
+        window.add(label2).pad(0, 0, 0, 0).row();
+        TextButton phase = new TextButton("Sub Health", skin);
+        phase.addListener(clickListener);
+        window.add(phase).pad(0, 0, 0, 0).row();
+
+
+        gameField.add(window).width(220).height(150).uniform();
 
     }
 }
