@@ -1,6 +1,9 @@
 package com.darklegions.game.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.darklegions.game.gameobjects.Cards;
 import com.sun.tools.javac.file.PathFileObject;
 
@@ -18,6 +21,10 @@ public class Deck {
     private static final int MAX_STRUCTURE = 10;
     private static final int MAX_CREATURE = 20;
     private static final int MAX_SPELL = 10;
+
+
+    Texture cardBack = new Texture(Gdx.files.internal("CardBack.png"));
+    private int deckSize;
 
     private ArrayList<Cards> deck;
     private Creature[] creaturePool = new Creature[]{
@@ -77,6 +84,8 @@ public class Deck {
             deck.add(structurePool[i]);
         }
 
+        setDeckSize(creaturePool.length + spellPool.length + structurePool.length);
+
     }
     public ArrayList<Cards> getDeck() {
         return deck;
@@ -87,6 +96,23 @@ public class Deck {
     }
 
     public Cards drawDeck() {
+        setDeckSize(getDeckSize() - 1);
         return (Cards) deck.remove(0);
+    }
+
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    public Texture getCardBack() {
+        return cardBack;
+    }
+
+    public void setCardBack(Texture cardBack) {
+        this.cardBack = cardBack;
+    }
+
+    public void setDeckSize(int deckSize) {
+        this.deckSize = deckSize;
     }
 }

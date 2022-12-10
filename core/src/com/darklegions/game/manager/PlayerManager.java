@@ -11,8 +11,6 @@ import java.util.List;
 public class PlayerManager {
     private String playerName;
 
-
-
     private int playerID;
     private long totalWins;
     private long totalLosses;
@@ -24,11 +22,9 @@ public class PlayerManager {
     private Integer magicTotal;
     private Integer motivationTotal;
 
-
-
     private List<Cards> playerHand;
     private Texture playerImage;
-    private Deck playerDeck;
+    public Deck playerDeck;
 
 
     public void init() {

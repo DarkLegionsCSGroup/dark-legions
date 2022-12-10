@@ -1,15 +1,14 @@
 package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Creature;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.darklegions.game.DarkLegions;
 import com.darklegions.game.manager.GameManager;
 
@@ -18,15 +17,10 @@ import org.w3c.dom.Text;
 public class DrawField {
 
     public DarkLegions parent;
-    public Creature card1;
-    public Creature card2;
-    public Creature card3;
+
 
     public DrawField(DarkLegions parent) {
         this.parent = parent;
-        card1 = new Creature();
-        card2 = new Creature("Eating God");
-        card3 = new Creature("Dork");
     }
 
     public Actor createField(GameManager currGame) {
@@ -81,6 +75,9 @@ public class DrawField {
             };
         };
 
+
+
+
         Window window = new Window("           P1", skin);
         window.add(label1).pad(0, 0, 0, 0).row();
         window.add(label2).pad(0, 0, 0, 0).row();
@@ -88,10 +85,6 @@ public class DrawField {
         phase.addListener(clickListener);
         window.add(phase).pad(0, 0, 0, 0).row();
 
-
-
-        TextButton playerOne = new TextButton(currGame.player1.getPlayerName(), skin);
-        TextButton handCardFive = new TextButton("card", skin);
 
         /*
               Player Hand
@@ -109,13 +102,30 @@ public class DrawField {
             Creature and Deck Zone
          */
         gameField.row().width(200).height(150).expand().uniform();
-        Table creatureZone = new Table();
-        TextButton deckZone = new TextButton("Deck Zone", skin);
+        final Table creatureZone = new Table();
+        final Button deckZone = new Button(new TextureRegionDrawable(currGame.player1.playerDeck.getCardBack()));
+        deckZone.setSkin(skin);
+        final TextButton deckZoneName = new TextButton(Integer.toString(currGame.player1.playerDeck.getDeckSize()), skin);
+        deckZone.add(deckZoneName);
         TextButton creatureCard = new TextButton("Card", skin);
         TextButton creatureCard2 = new TextButton("Card", skin);
         TextButton creatureCard3 = new TextButton("Card", skin);
         TextButton creatureCard4 = new TextButton("Card", skin);
         TextButton graveZone = new TextButton("Graveyard", skin);
+
+
+        ClickListener deckListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Cards topCard = currGame.player1.playerDeck.drawDeck();
+                Table cardTable = topCard.drawCard();
+                gameField.addActorAfter(creatureZone, cardTable);
+                cardTable.moveBy(400, 400);
+                deckZoneName.setText(Integer.toString(currGame.player1.playerDeck.getDeckSize()));
+            };
+        };
+
+        deckZone.addListener(deckListener);
 
         creatureZone.defaults().space(10).width(200).height(175).expand().uniform();
 
@@ -131,7 +141,7 @@ public class DrawField {
 
     }
 
-    private void drawPlayer2(Table gameField, final GameManager currGame) {
+    private void drawPlayer2(final Table gameField, final GameManager currGame) {
 
 
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
@@ -141,8 +151,11 @@ public class DrawField {
         float cardHeight = Cards.HEIGHT;
         TextButton playerTwo = new TextButton(currGame.player2.getPlayerName(), skin);
 
-        Table creatureZoneP2 = new Table();
-        TextButton deckZoneP2 = new TextButton("Deck Zone", skin);
+        final Table creatureZoneP2 = new Table();
+        Button deckZoneP2 = new Button(new TextureRegionDrawable(currGame.player2.playerDeck.getCardBack()));
+        deckZoneP2.setSkin(skin);
+        final TextButton deckZoneName = new TextButton(Integer.toString(currGame.player2.playerDeck.getDeckSize()), skin);
+        deckZoneP2.add(deckZoneName);
         TextButton creatureCardP2 = new TextButton("Card", skin);
         TextButton creatureCard2P2 = new TextButton("Card", skin);
         TextButton creatureCard3P2 = new TextButton("Card", skin);
@@ -153,6 +166,7 @@ public class DrawField {
 
 
         gameField.add(creatureZoneP2).colspan(6).fill();
+
         creatureZoneP2.add(deckZoneP2);
         creatureZoneP2.add(creatureCardP2);
         creatureZoneP2.add(creatureCard2P2);
@@ -161,6 +175,20 @@ public class DrawField {
         creatureZoneP2.add(graveZoneP2);
         creatureZoneP2.toBack();
         creatureZoneP2.setDebug(true);
+
+
+        ClickListener deckListener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Cards topCard = currGame.player2.playerDeck.drawDeck();
+                Table cardTable = topCard.drawCard();
+                gameField.addActorAfter(creatureZoneP2, cardTable);
+                cardTable.moveBy(400, 300);
+                deckZoneName.setText(Integer.toString(currGame.player2.playerDeck.getDeckSize()));
+            };
+        };
+
+        deckZoneP2.addListener(deckListener);
 
         gameField.row().width(200).height(150).expand().uniform();
 
@@ -173,7 +201,7 @@ public class DrawField {
         Label label1 = new Label(currGame.player2.getPlayerName(), skin);
         final Label label2 = new Label("Health: " + currGame.player2.getHealthTotal(), skin);
 
-        ClickListener clickListener = new ClickListener() {
+        ClickListener healthListener = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(currGame.player2.getHealthTotal() < 1) {
@@ -190,7 +218,7 @@ public class DrawField {
         window.add(label1).pad(0, 0, 0, 0).row();
         window.add(label2).pad(0, 0, 0, 0).row();
         TextButton phase = new TextButton("Sub Health", skin);
-        phase.addListener(clickListener);
+        phase.addListener(healthListener);
         window.add(phase).pad(0, 0, 0, 0).row();
 
 

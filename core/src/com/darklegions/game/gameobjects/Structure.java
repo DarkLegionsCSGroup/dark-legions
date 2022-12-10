@@ -32,11 +32,12 @@ public class Structure extends Actor implements Cards {
     private Skin skin;
     private Image background;
     Texture texture;
-    BackgroundColor backgroundColor = new BackgroundColor("white_texture.png");
+    BackgroundColor backgroundColor;
 
 
     public Structure(String name) {
         this.cardName = name;
+        backgroundColor = new BackgroundColor("white_texture.png");
     }
 
     @Override
