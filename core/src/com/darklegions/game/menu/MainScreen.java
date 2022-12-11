@@ -59,11 +59,12 @@ public class MainScreen extends ScreenAdapter implements InputProcessor {
 
 //    @Override
 //    public void resize(int width, int height) {
+//        StretchViewport stretch = new StretchViewport(width, height);
 //        //stage = new Stage(new StretchViewport(width, height));
 //        Gdx.input.setInputProcessor(stage);
 //        Gdx.graphics.setWindowedMode(1600  , 1000);
 //        //TODO: Resize viewport to fit screen
-//        //stage.getViewport().update(width, height, true);
+//        stage.getViewport().update(width, height, true);
 //    }
 
     @Override

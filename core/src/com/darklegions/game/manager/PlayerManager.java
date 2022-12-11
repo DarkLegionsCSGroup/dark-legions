@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerManager {
+    private final static int MAX_HAND_SIZE = 5;
     private String playerName;
 
     private int playerID;
@@ -62,8 +63,7 @@ public class PlayerManager {
     }
 
     public void drawOne() {
-        int MAXHANDSIZE = 5;
-        if(playerHand.size() < MAXHANDSIZE) {
+        if(playerHand.size() < MAX_HAND_SIZE) {
             playerHand.add(playerDeck.drawDeck());
         }
     }

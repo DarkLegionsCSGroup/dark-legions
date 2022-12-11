@@ -55,8 +55,8 @@ public class DrawField {
         Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         float buttonWidth = Gdx.graphics.getWidth()/8 * 0.9f;
         float buttonHeight = buttonWidth * 1.0f;
-        float cardHeight = Cards.HEIGHT;
-        float cardWidth = Cards.WIDTH;
+        final float cardHeight = Cards.HEIGHT;
+        final float cardWidth = Cards.WIDTH;
         /*
              Adding Player Stats and click listeners
          */
@@ -72,7 +72,7 @@ public class DrawField {
                 }
                 currGame.player1.setHealthTotal(currGame.player1.getHealthTotal() - 1);
                 label2.setText("Health: " + currGame.player1.getHealthTotal());
-            };
+            }
         };
 
 
@@ -91,7 +91,7 @@ public class DrawField {
          */
         gameField.add(window).width(220).height(150).expand().uniform();
         for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
+            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).width(Cards.WIDTH).height(Cards.HEIGHT);
         }
 
 
@@ -119,10 +119,12 @@ public class DrawField {
             public void clicked(InputEvent event, float x, float y) {
                 Cards topCard = currGame.player1.playerDeck.drawDeck();
                 Table cardTable = topCard.drawCard();
+                cardTable.setHeight(Cards.HEIGHT);
+                cardTable.setWidth(Cards.WIDTH);
                 gameField.addActorAfter(creatureZone, cardTable);
-                cardTable.moveBy(400, 400);
+                cardTable.moveBy(900, 400);
                 deckZoneName.setText(Integer.toString(currGame.player1.playerDeck.getDeckSize()));
-            };
+            }
         };
 
         deckZone.addListener(deckListener);
@@ -135,7 +137,7 @@ public class DrawField {
         creatureZone.add(creatureCard2);
         creatureZone.add(creatureCard3);
         creatureZone.add(creatureCard4);
-        creatureZone.add(deckZone);
+        creatureZone.add(deckZone).width(cardWidth).height(cardHeight);
         creatureZone.toBack();
         creatureZone.setDebug(true);
 
@@ -167,7 +169,7 @@ public class DrawField {
 
         gameField.add(creatureZoneP2).colspan(6).fill();
 
-        creatureZoneP2.add(deckZoneP2);
+        creatureZoneP2.add(deckZoneP2).width(cardWidth).height(cardHeight);
         creatureZoneP2.add(creatureCardP2);
         creatureZoneP2.add(creatureCard2P2);
         creatureZoneP2.add(creatureCard3P2);
@@ -182,18 +184,20 @@ public class DrawField {
             public void clicked(InputEvent event, float x, float y) {
                 Cards topCard = currGame.player2.playerDeck.drawDeck();
                 Table cardTable = topCard.drawCard();
+                cardTable.setWidth(Cards.WIDTH);
+                cardTable.setHeight(Cards.HEIGHT);
                 gameField.addActorAfter(creatureZoneP2, cardTable);
-                cardTable.moveBy(400, 300);
+                cardTable.moveBy(400, 250);
                 deckZoneName.setText(Integer.toString(currGame.player2.playerDeck.getDeckSize()));
             };
         };
 
         deckZoneP2.addListener(deckListener);
 
-        gameField.row().width(200).height(150).expand().uniform();
+        gameField.row().width(250).height(150).expand().uniform();
 
         for(int i = 0; i < currGame.player2.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight).uniform();
+            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight);
         }
 
 
