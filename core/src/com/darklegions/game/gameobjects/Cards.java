@@ -12,9 +12,8 @@ import com.darklegions.game.DarkLegions;
 
 public interface Cards {
 
-
-    float HEIGHT = 150;
-    float WIDTH = 100;
+    float HEIGHT = 170;
+    float WIDTH = 120;
 
 
      Sprite spriteCardBack = null;

@@ -9,6 +9,7 @@ import com.sun.tools.javac.file.PathFileObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -21,6 +22,7 @@ public class Deck {
     private static final int MAX_STRUCTURE = 10;
     private static final int MAX_CREATURE = 20;
     private static final int MAX_SPELL = 10;
+    private static final int DECK_SIZE = 40;
 
 
     Texture cardBack = new Texture(Gdx.files.internal("CardBack.png"));
@@ -75,17 +77,20 @@ public class Deck {
         shuffleArray(spellPool);
         shuffleArray(structurePool);
         for(int i = 0; i < creaturePool.length; i++) {
+            //shuffleArray(creaturePool);
             deck.add(creaturePool[i]);
         }
         for(int i = 0; i < spellPool.length; i++) {
+            //shuffleArray(spellPool);
             deck.add(spellPool[i]);
         }
         for(int i = 0; i < structurePool.length; i++) {
+            //shuffleArray(structurePool);
             deck.add(structurePool[i]);
         }
 
         setDeckSize(creaturePool.length + spellPool.length + structurePool.length);
-
+        //setDeckSize(DECK_SIZE);
     }
     public ArrayList<Cards> getDeck() {
         return deck;

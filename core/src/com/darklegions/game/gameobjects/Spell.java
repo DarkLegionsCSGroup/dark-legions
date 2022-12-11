@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
@@ -43,46 +45,53 @@ public class Spell extends Actor implements Cards {
 
     @Override
     public Table drawCard() {
-
+        skin.getFont("font").getData().setScale(0.3f);
+        Label nameLabel = new Label(getCardName(), skin);
+        //nameLabel.setScale(0.1f,0.1f);
         table.setBackground(backgroundColor);
+        table.setTouchable(Touchable.enabled);
+        table.setWidth(Cards.WIDTH);
+        table.setHeight(Cards.HEIGHT);
         table.addListener(new DragListener() {
             public void drag(InputEvent event, float x, float y, int pointer) {
                 table.moveBy(x - table.getWidth() / 2, y - table.getHeight() / 2);
+                table.toFront();
             }
         });
         /* Adds the "Cost" label and centers its text. */
-        table.add("C").padLeft(10).width(30).height(30).getActor().setAlignment(Align.center);
+        table.add("C").width(1).height(1).top().left().getActor().setAlignment(Align.topLeft);
         /* Important! Adds a column between "Cost" and "S". Used to
          * align "Image", "Title", "Description", and "Class". */
-        table.add();
+        //table.add();
         /* Same as "Cost". */
-        table.add("S").width(30).height(30).getActor().setAlignment(Align.center);
+        table.add("S").width(1).height(1).top().right().getActor().setAlignment(Align.topRight);
         table.row();
 
         /* Add "Image" to middle column with a height of 50% of the
          * background's height minus 75 (the top columns height). */
-        table.add();
-        table.add(background).size(100f);
-        table.add();
+        //table.add();
+        //table.add(background).size(75f, 75f).center().getActor().setAlign(Align.center);
+        table.add(background).colspan(2).padTop(10).size(85f, 80f).getActor().setAlign(Align.center);
+        //table.add();
         table.row();
 
         /* Add "Title".*/
-        table.add();
-        table.add(getCardName());
-        table.add();
+        //table.add();
+        table.add(nameLabel).colspan(2).top().getActor().setAlignment(Align.center);
+        //table.add();
         table.row();
 
         /* Add "Description". */
-        table.add();
-        table.add(getDescription()).grow().getActor().setAlignment(Align.center);
-        table.add();
+        //table.add();
+        table.add(getDescription()).colspan(2).grow().getActor().setAlignment(Align.center);
+        //table.add();
         table.row();
 
         /* Add "Life", "Class", and "Attack". Same deal as "Cost" and
          * "S" */
-        table.add("MC").width(30).height(30).getActor().setAlignment(Align.center);
-        table.add("").growX().fillY().getActor().setAlignment(Align.center);
-        table.add("END").width(30).height(30).getActor().setAlignment(Align.center);
+        table.add("MC").width(1).height(1).bottom().left().getActor().setAlignment(Align.bottomLeft);
+        //table.add("").growX().fillY().getActor().setAlignment(Align.center);
+        table.add("End").width(1).height(1).bottom().right().getActor().setAlignment(Align.bottomRight);
 
         /* Used to show the table above the background image. You
          * should probably use Table#setBackground(drawable)
