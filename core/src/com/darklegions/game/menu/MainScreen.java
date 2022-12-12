@@ -6,6 +6,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,6 +24,11 @@ public class MainScreen extends ScreenAdapter implements InputProcessor {
     OrthographicCamera camera;
     GameManager newGame;
     DrawField drawField;
+
+    public static Texture backgroundTexture;
+    public static Sprite backgroundSprite;
+    private SpriteBatch spriteBatch;
+
     private InputMultiplexer inputMultiplexer;
 
 
@@ -33,16 +41,28 @@ public class MainScreen extends ScreenAdapter implements InputProcessor {
         newGame = new GameManager();
         drawField = new DrawField(parent);
         stage.addActor(drawField.createField(newGame));
+        backgroundTexture = new Texture("background.jpg");
+        backgroundSprite =new Sprite(backgroundTexture);
+        spriteBatch = new SpriteBatch();
     }
 
-
+    public void renderBackground() {
+        backgroundSprite.draw(spriteBatch);
+        backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
     @Override
     public void render(float delta) {
         //Gdx.input.setInputProcessor(stage);
         super.render(delta);
         //newGame.manageState(drawField);
+
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        spriteBatch.begin();
+        renderBackground();
+        spriteBatch.end();
+
         stage.act();
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800,400);
@@ -53,6 +73,7 @@ public class MainScreen extends ScreenAdapter implements InputProcessor {
             Gdx.app.log("MainScreen", "Pressed");
             parent.changeScreen(DarkLegions.MENU);
         }
+
         //TODO: Draw empty playing field
 
     }
