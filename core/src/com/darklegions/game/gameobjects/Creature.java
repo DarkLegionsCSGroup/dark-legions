@@ -155,13 +155,14 @@ public class Creature extends Actor implements Cards {
     @Override
     public Table drawCard() {
         skin.getFont("font").getData().setScale(0.3f);
+        table.setWidth(Cards.WIDTH);
+        table.setHeight(Cards.HEIGHT);
         Label nameLabel = new Label(getCardName(), skin);
         //nameLabel.setScale(0.1f,0.1f);
+        nameLabel.setWidth(Cards.WIDTH - 10);
         table.setBackground(backgroundColor);
         table.setTouchable(Touchable.enabled);
-        table.setWidth(Cards.WIDTH);
         table.defaults().setActorBounds(10,10,Cards.WIDTH,Cards.HEIGHT);
-        table.setHeight(Cards.HEIGHT);
         table.addListener(new DragListener() {
             public void drag(InputEvent event, float x, float y, int pointer) {
                 table.moveBy(x - table.getWidth() / 2, y - table.getHeight() / 2);
@@ -202,13 +203,13 @@ public class Creature extends Actor implements Cards {
 
         /* Add "Title".*/
         //table.add();
-        table.add(nameLabel).colspan(2).top().getActor().setAlignment(Align.center);
+        table.add(nameLabel).width(Cards.WIDTH - 10).colspan(2).top().getActor().setAlignment(Align.center);
         //table.add();
         table.row();
 
         /* Add "Description". */
         //table.add();
-        table.add(this.description).colspan(2).grow().top().getActor().setAlignment(Align.center);
+        table.add(this.description).width(Cards.WIDTH - 10).colspan(2).grow().top().getActor().setAlignment(Align.center);
         //table.add();
         table.row();
 
