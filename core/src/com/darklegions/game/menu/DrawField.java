@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -93,10 +94,23 @@ public class DrawField {
         /*
               Player Hand
          */
+        DragAndDrop hand = new DragAndDrop();
+
         gameField.add(window).width(220).height(150).expand().uniform();
+        HorizontalGroup hand1 = new HorizontalGroup();
         for(int i = 0; i < currGame.player1.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player1.getPlayerHand().get(i).drawCard()).width(Cards.WIDTH).height(Cards.HEIGHT);
+            Table temp = new Table();
+            temp = currGame.player1.getPlayerHand().get(i).drawCard();
+            hand1.addActor(temp);
+            hand.addSource(new DragAndDrop.Source(temp) {
+                @Override
+                public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+                    return null;
+                }
+            });
         }
+
+        gameField.add(hand1).colspan(6).center().left();
 
 
         //gameField.add(handCardFive).width(buttonWidth).expandX();
@@ -117,6 +131,17 @@ public class DrawField {
         TextButton creatureCard4 = new TextButton("Card", skin);
         TextButton graveZone = new TextButton("Graveyard", skin);
 
+        hand.addTarget(new DragAndDrop.Target(creatureCard) {
+            @Override
+            public boolean drag(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+                return true;
+            }
+
+            @Override
+            public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+
+            }
+        });
 
         ClickListener deckListener = new ClickListener() {
             @Override
@@ -200,9 +225,20 @@ public class DrawField {
 
         gameField.row().width(250).height(150).expand().uniform();
 
+        DragAndDrop hand = new DragAndDrop();
+
+        HorizontalGroup hand2 = new HorizontalGroup();
         for(int i = 0; i < currGame.player2.getPlayerHand().size(); i++) {
-            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight);
+            Table temp = new Table();
+            temp = currGame.player2.getPlayerHand().get(i).drawCard();
+            hand2.addActor(temp);
         }
+
+        gameField.add(hand2);
+
+//        for(int i = 0; i < currGame.player2.getPlayerHand().size(); i++) {
+//            gameField.add(currGame.player2.getPlayerHand().get(i).drawCard()).width(cardWidth).height(cardHeight);
+//        }
 
 
         // ClickListener clickListener;
