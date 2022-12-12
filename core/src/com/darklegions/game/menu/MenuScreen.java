@@ -3,6 +3,7 @@ package com.darklegions.game.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,11 +20,9 @@ import com.darklegions.game.utils.Constants;
 
 public class MenuScreen extends AbstractGameScreen {
     public static final String TAG = MenuScreen.class.getName();
+    private OrthographicCamera camera;
     private Stage stage;
     private DarkLegions parent =  (DarkLegions) Gdx.app.getApplicationListener();
-    //public SpriteBatch batch = new SpriteBatch();
-    //public static Sprite backgroundSprite;
-    //TODO: GET A NEW BACKGROUND IMAGE TO FIT AND SCALE PROPERLY
 
     private Skin skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
@@ -36,6 +35,7 @@ public class MenuScreen extends AbstractGameScreen {
     private Slider sldMusic;
     private CheckBox chkShowFpsCounter;
     private CheckBox chkShowFullScreen;
+    private TextButton textButton;
 
     Texture background = new Texture(Gdx.files.internal("concept.png"));
     Sprite backgroundSprite = new Sprite(background);
@@ -43,8 +43,6 @@ public class MenuScreen extends AbstractGameScreen {
     private void rebuildStage () {
         // build all layers
         Table layerBackground = buildBackgroundLayer();
-        //TODO: Add a LOGO
-//        Table layerLogos = buildLogosLayer();
         Table layerControls = buildControlsLayer();
         Table layerLeftMenu = buildLeftMenuLayer();
         Table layerOptionsWindow = buildOptionsWindowLayer();
@@ -55,48 +53,66 @@ public class MenuScreen extends AbstractGameScreen {
         stage.addActor(stack);
         stack.setSize(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
         stack.add(layerBackground);
-//        stack.add(layerLogos);
         stack.add(layerLeftMenu);
         stack.add(layerControls);
         stage.setDebugAll(false); // remove later
         stage.addActor(layerOptionsWindow);
     }
 
+    /**
+     * Builds the background layer.
+     * @return
+     */
     private Table buildBackgroundLayer () {
         Table layer = new Table();
-        // + Background
         backgroundSprite = new Sprite(new Texture(Gdx.files.internal("concept.png")));
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         layer.add(new Image(backgroundSprite));
         return layer;
     }
+
+    /**
+     * Builds the controls layer.
+     * @return
+     */
     private Table buildLeftMenuLayer() {
         Table layer = new Table();
+        layer.pad(0, 0, 0, 0);
         /* BUTTONS FOR THE MAIN MENU */
         //TODO: Disable the gameTitle button or change it to text
-        //TextField gameTitleNew = new TextField("Dark Legions", skin); //Was testing TextField instead of TextButton
         Label gameTitle = new Label("Dark Legions", skin, "title");
-        //gameTitle.setDisabled(true);
         TextButton newGame = new TextButton("New Game", skin);
         TextButton gallery = new TextButton("Gallery", skin);
         TextButton options = new TextButton("Options", skin);
         TextButton exit = new TextButton("Exit", skin);
 
+        skin.getFont("title").getData().setScale(0.5f);
+
+
         /* FORMATTING BUTTONS INTO A TABLE */
         //TODO: Maybe shift the buttons over to the left side of the screen?
         layer.left();
-        layer.padLeft(20);
-        layer.add(gameTitle).fillX().uniformX();
-        layer.row().pad(10, 0, 10, 0);
-        layer.add(newGame).fillX().uniformX();
-        layer.row().pad(10, 0, 10, 0);
-        layer.add(gallery).fillX().uniformX();
-        layer.row().pad(10, 0, 10, 0);
-        layer.add(options).fillX().uniformX();
-        layer.row().pad(10, 0, 10, 0);
-        layer.add(exit).fillX().uniformX();
-        layer.setDebug(false);
+        layer.padLeft(5);
+        layer.add(gameTitle).colspan(2).align(Align.left).padBottom(20);
+        layer.row().pad(2, 0, 2, 0);
+        layer.add(newGame).align(Align.left).padBottom(20);
+        layer.row().pad(2, 0, 2, 0);
+        layer.add(gallery).align(Align.left).padBottom(20);
+        layer.row().pad(2, 0, 2, 0);
+        layer.add(options).align(Align.left).padBottom(20);
+        layer.row().pad(2, 0, 2, 0);
+        layer.add(exit).align(Align.left).padBottom(20);
+        layer.setTransform(true);
+        layer.setScale(0.75f);
+        //layer.align(Align.top);
+        //layer.setScale(0.5f);
+        //layer.setWidth(100);
+        //Align the table to the left side of the screen and set the position to the bottom
 
+
+        /**
+         * LISTENERS FOR BUTTONS
+         */
         /* BUTTON LISTENERS START */
         newGame.addListener(new ChangeListener() {
             @Override
@@ -126,14 +142,23 @@ public class MenuScreen extends AbstractGameScreen {
                 Gdx.app.exit();
             }
         });
-        layer.setDebug(false);
+        layer.setDebug(true);
+
         return layer;
     }
 
+    /**
+     * Builds the controls layer.
+     * @return
+     */
     private Table buildControlsLayer () {
         return new Table();
     }
 
+    /**
+     * Builds the options window layer.
+     * @return
+     */
     private void loadSettings() {
         Options prefs = Options.instance;
         prefs.load();
@@ -146,6 +171,10 @@ public class MenuScreen extends AbstractGameScreen {
 
     }
 
+    /**
+     * Builds the options window layer.
+     * @return
+     */
     private void saveSettings() {
         Options prefs = Options.instance;
         prefs.sound = chkSound.isChecked();
@@ -206,13 +235,11 @@ public class MenuScreen extends AbstractGameScreen {
 
     private Table buildOptWinDebug () {
         Table tbl = new Table();
-        // + Title: "Debug"
         tbl.pad(10, 10, 0, 10);
         tbl.add(new Label("Debug", skin, "font", Color.RED)).colspan(3);
         tbl.row();
         tbl.columnDefaults(0).padRight(10);
         tbl.columnDefaults(1).padRight(10);
-        // + Checkbox, "Show FPS Counter" label
         chkShowFpsCounter = new CheckBox("", skin);
         tbl.add(new Label("Show FPS Counter", skin));
         chkShowFullScreen = new CheckBox("", skin);
@@ -227,7 +254,6 @@ public class MenuScreen extends AbstractGameScreen {
     //
     private Table buildOptWinButtons () {
         Table tbl = new Table();
-        // + Separator
         Label lbl;
         lbl = new Label("", skin);
         lbl.setColor(0.75f, 0.75f, 0.75f, 1);
@@ -284,57 +310,45 @@ public class MenuScreen extends AbstractGameScreen {
         winOptions.setVisible(false);
     }
 
-    // + Cancel Button with event handler
-    //create the window with the title
     private Window buildOptionsWindowLayer() {
         winOptions = new Window("Options", skin);
-        //Center the winOptions text in the title
-        winOptions.getTitleLabel().setAlignment(Align.center);
-        // + Audio Settings: Sound/Music CheckBox and Volume Slider
-        winOptions.add(buildOptWinAudioSettings()).row();
-        // + Debug: Show FPS Counter
+        winOptions.getTitleLabel().setAlignment(Align.center); //Center the winOptions text in the title
+        winOptions.add(buildOptWinAudioSettings()).row(); //Audio Settings: Sound/Music CheckBox and Volume Slider
+
         winOptions.add(buildOptWinDebug()).row();
-        // + Separator and Buttons (Save, Cancel)
         winOptions.add(buildOptWinButtons()).pad(10, 0, 10, 0);
 
         // Make options window slightly transparent
         winOptions.setColor(1, 1, 1, 0.8f);
-        // Hide options window by default
         winOptions.setVisible(false);
         if (debugEnabled) winOptions.debug();
-        // Let TableLayout recalculate widget sizes and positions
         winOptions.pack();
-        // Move options window to bottom right corner
-        //Get current viewport size
         float width = Gdx.graphics.getWidth();
         winOptions.setPosition(  width - winOptions.getWidth() - 50, 50);
         winOptions.setMovable(false);
         winOptions.setDebug(false);
+        winOptions.setTransform(true);
+        winOptions.setScale(0.5f);
         return winOptions;
     }
-    // + Cancel Button with event handler
-//        btnWinOptCancel = new TextButton("Cancel", skinLibgdx);
-//        tbl.add(btnWinOptCancel);
-//        btnWinOptCancel.addListener(new ChangeListener() {
-//            @Override
-//            public void changed (ChangeEvent event, Actor actor) {
-//                onCancelClicked();
-//            }
-//        });
+
     public MenuScreen(DarkLegions darkLegions) {
         super(darkLegions);
+
+//        camera = new OrthographicCamera();
+//        camera.position.set(0, 0, 0);
+//        camera.setToOrtho(false, 800, 480);
+//        camera.update();
+
         stage = new Stage(new ScreenViewport());
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
+//        stage.draw();
 
         Table table = new Table();
-        table.setFillParent(true); //table is set to fill the stage
+        table.setFillParent(false); //table is set to fill the stage
         table.setDebug(false); // This is optional, but enables debug lines for tables.
-
         stage.addActor(table); //Creates the table to be added to the stage
 
-        //stage.addActor(OptionWindow);
-        /* BUTTON LISTENERS END */
         stage.draw();
     }
 
@@ -356,24 +370,6 @@ public class MenuScreen extends AbstractGameScreen {
             }
         }
         stage.draw();
-        //Table.drawDebug(stage);
-
-
-//        super.render(delta);
-//        // Clear the screen
-//        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        //stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-//        //Draws the background image to the screen
-//        stage.getBatch().begin();
-//        //TODO: FIX THE BACKGROUND IMAGE TO FIT THE SCREEN SIZE AND NOT BE STRETCHED
-//        stage.getBatch().draw(backgroundSprite, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-//        //backgroundSprite.draw(stage.getBatch()); //Draws the background image to screen
-//        stage.getBatch().end();
-//        Gdx.input.setInputProcessor(stage);
-//        stage.draw();
-//        testCard.drawCard(batch, shapeRenderer);
-//        shapeRenderer.end();
     }
 
     @Override
