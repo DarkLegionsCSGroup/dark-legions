@@ -40,6 +40,13 @@ public class Structure extends Actor implements Cards {
         backgroundColor = new BackgroundColor("white_texture.png");
     }
 
+    public Structure(String name, String Description) {
+        this.description = Description;
+        this.cardName = name;
+        backgroundColor = new BackgroundColor("white_texture.png");
+    }
+
+
     @Override
     public Sprite getSpriteCardBack() {
         return null;

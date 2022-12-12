@@ -38,6 +38,16 @@ public class Spell extends Actor implements Cards {
 
     }
 
+    public Spell(String name, String Description) {
+        setDescription("I am a card");
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        table = new Table(skin);
+        texture = new Texture(Gdx.files.internal("concept.png"));
+        background = new Image(texture);
+        backgroundColor.setColor(2, 179, 228, 255);
+
+    }
+
     @Override
     public Sprite getSpriteCardBack() {
         return null;
