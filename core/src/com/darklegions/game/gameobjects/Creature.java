@@ -27,7 +27,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
-import sun.font.TextLabel;
 
 public class Creature extends Actor implements Cards {
 
@@ -77,6 +76,22 @@ public class Creature extends Actor implements Cards {
         background = new Image(texture);
         backgroundColor.setColor(200, 0, 0, 255); // r, g, b, a
     }
+
+
+    public Creature (String cardName, String Texture, String Description) {
+        this.cardName = cardName;
+        this.power = 3;
+        this.defend = 3;
+        this.setDescription(Description);
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+        //skin.getFont("font").getData().setScale(0.1f);
+        table = new Table(skin);
+        texture = new Texture(Gdx.files.internal(Texture));
+        background = new Image(texture);
+        backgroundColor.setColor(200, 0, 0, 255); // r, g, b, a
+    }
+
+
 
     public String getCardName() {
         return cardName;

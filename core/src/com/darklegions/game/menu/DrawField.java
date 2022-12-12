@@ -33,7 +33,7 @@ public class DrawField {
         gameField.defaults().width(200).height(180).expand().uniform();
         gameField.left().top();
         gameField.setFillParent(true);
-        gameField.setDebug(true);
+        gameField.setDebug(false);
         gameField.padTop(30).padBottom(30);
 
 
@@ -143,7 +143,7 @@ public class DrawField {
         creatureZone.add(creatureCard4);
         creatureZone.add(deckZone).width(cardWidth).height(cardHeight);
         creatureZone.toBack();
-        creatureZone.setDebug(true);
+        creatureZone.setDebug(false);
 
     }
 
@@ -180,7 +180,7 @@ public class DrawField {
         creatureZoneP2.add(creatureCard4P2);
         creatureZoneP2.add(graveZoneP2);
         creatureZoneP2.toBack();
-        creatureZoneP2.setDebug(true);
+        creatureZoneP2.setDebug(false);
 
 
         ClickListener deckListener = new ClickListener() {

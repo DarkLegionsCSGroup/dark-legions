@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.darklegions.game.gameobjects.Cards;
-import com.sun.tools.javac.file.PathFileObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,21 +29,21 @@ public class Deck {
 
     private ArrayList<Cards> deck;
     private Creature[] creaturePool = new Creature[]{
-            new Creature("Captain Bogart"),
-            new Creature("Space Dog"),
-            new Creature("Mist Zombie"),
-            new Creature("Zena the Instigator"),
-            new Creature("Reaper"),
-            new Creature("Zombie Overlord"),
-            new Creature("Zombie Ferry"),
-            new Creature("The All-Seeing Parasite"),
-            new Creature("Ice Golem"),
-            new Creature("Brax, Brother of Ice"),
-            new Creature("Garn, Brother of Fire"),
-            new Creature("Fire Giant"),
-            new Creature("Mineral Worker"),
-            new Creature("Magic Cultist"),
-            new Creature("Political Guide"),
+            new Creature("Captain Bogart", "Cards/Captain_Bogart.png", "The Captain of Inner Circles"),
+            new Creature("Space Dog", "Cards/Space Dog.png", "He's a dog. In Space."),
+            new Creature("Mist Zombie", "Cards/Mist Zombie.png", "Scarier cause you can't see him"),
+            new Creature("Zena the Instigator", "Cards/Zena Instigator.png", "Don't try me"),
+            new Creature("Reaper", "Cards/Reaper.png", "Death's Assistant"),
+            new Creature("Zombie Overlord", "Cards/Zombie Overlord.png", "King of the Zombies"),
+            new Creature("Zombie Ferry", "Cards/Zombie Ferry.png", "Better than the S.I Ferry!"),
+            new Creature("The All-Seeing Parasite", "Cards/Parasite.png", "Parasites are scary"),
+            new Creature("Ice Golem", "Cards/Ice Golem.png", "Iceeeeeeee"),
+            new Creature("Brax, Brother of Ice", "Cards/Brax Brother of Ice.png", "I'm made of fire"),
+            new Creature("Garn, Brother of Fire" , "Cards/Garn Brother of Fire.png", "I'm made of ice"),
+            new Creature("Fire Giant", "Cards/Fire Giant.png", "Fireeeeee"),
+            new Creature("Mineral Worker", "Cards/Mineral Worker.png", "Minerals"),
+            new Creature("Magic Cultist", "Cards/Magic Cultist.png", "DIE FOOLS"),
+            new Creature("Political Guide", "Cards/Political Guide.png", "I'm here for you." ),
             //new Creature("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
     };
 
