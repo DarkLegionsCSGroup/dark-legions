@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.darklegions.game.gameobjects.Cards;
 import com.darklegions.game.gameobjects.Creature;
 import com.darklegions.game.DarkLegions;
@@ -78,7 +79,10 @@ public class DrawField {
 
 
 
-        Window window = new Window("           P1", skin);
+        Window window = new Window("P1", skin);
+        window.setMovable(false);
+        window.setResizable(false);
+        window.getTitleLabel().setAlignment(Align.center);
         window.add(label1).pad(0, 0, 0, 0).row();
         window.add(label2).pad(0, 0, 0, 0).row();
         TextButton phase = new TextButton("Sub Health", skin);
@@ -218,13 +222,15 @@ public class DrawField {
 
 
 
-        Window window = new Window("           P2", skin);
+        Window window = new Window("P2", skin);
+        window.getTitleLabel().setAlignment(Align.center);
+        window.setMovable(false);
+        window.setResizable(false);
         window.add(label1).pad(0, 0, 0, 0).row();
         window.add(label2).pad(0, 0, 0, 0).row();
         TextButton phase = new TextButton("Sub Health", skin);
         phase.addListener(healthListener);
         window.add(phase).pad(0, 0, 0, 0).row();
-
 
         gameField.add(window).width(220).height(150).uniform();
 

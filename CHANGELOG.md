@@ -1,5 +1,13 @@
 # semantic Versioning Changelog
 
+## [1.2.3](https://github.com/johnclark96/dark-legions/compare/v1.2.2...v1.2.3) (2022-12-12)
+
+
+### Bug Fixes
+
+* **mainmenu:** code cleanup and scale attempt ([0fbdc8d](https://github.com/johnclark96/dark-legions/commit/0fbdc8db0fd3a59a31c70c55e75a6085c15444da))
+* **mainmenu:** setMovable false and aligned title ([0148d5c](https://github.com/johnclark96/dark-legions/commit/0148d5c0ce5e031041e943a1db3c293cf89ac1cf))
+
 ## [1.2.2](https://github.com/johnclark96/dark-legions/compare/v1.2.1...v1.2.2) (2022-12-06)
 
 
